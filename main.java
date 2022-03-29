@@ -83,7 +83,7 @@ public class main {
     {
         double X = length_R * Math.cos(Math.toRadians(Angle));
 
-        DrawText("X:"+X,50,50,20,BLACK);
+        //DrawText("X:"+X,50,50,20,BLACK);
         return X;
     }
 

@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="jaylib">
     <CLASSES>
-      <root url="jar://$USER_HOME$/Downloads/jaylib.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jaylib/jaylib.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
