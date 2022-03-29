@@ -82,8 +82,6 @@ public class main {
     public static double getX(double length_R, double Angle)
     {
         double X = length_R * Math.cos(Math.toRadians(Angle));
-
-        //DrawText("X:"+X,50,50,20,BLACK);
         return X;
     }
 
