@@ -1,18 +1,10 @@
 import static com.raylib.Jaylib.*;
 import static com.raylib.Jaylib.Vector2;
 import java.util.ArrayList;
-//import java.util.Scanner;
-
-
-//instantiate mouse position
 
 
 
 public class main {
-
-
-
-
 
     public static void draw(float dudePosX, float dudePosY)
     {
@@ -35,10 +27,10 @@ public class main {
         ClearBackground(WHITE);
     }
 
-    public static double calcAngle()
+    public static double calcAngle(Vector2 dudePos)
     {
-       double x = GetScreenWidth()/2;
-       double y = GetScreenHeight()/2;
+       double x = dudePos.x();
+       double y = dudePos.y();
 
        double mouseX = GetMouseX();
        double mouseY = GetMouseY();
@@ -114,9 +106,9 @@ public class main {
 
 
     public static void main(String args[]) {
-        InitWindow(800, 450, "Demo");
+        InitWindow(1920, 1080, "Demo");
         SetTargetFPS(60);
-
+        ToggleFullscreen();
         //create array of pizzas to be shot and drawn
         ArrayList<pizza> pizzaArray = new ArrayList<>();
 
@@ -168,7 +160,7 @@ public class main {
             if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
             {
                 //pizza pizzaObj = new pizza(50,50, GetMouseX(),GetMouseY());
-                pizza pizzaObj = new pizza(20,50, dudePos.x(),dudePos.y(), calcAngle());
+                pizza pizzaObj = new pizza(20,50, dudePos.x(),dudePos.y(), calcAngle(dudePos));
                 pizzaArray.add(pizzaObj);
             }
             if (IsKeyPressed(KEY_T))
@@ -176,7 +168,7 @@ public class main {
                 var y = 4;
             }
             DrawText(dudeAngle, 50, 100, 100, GREEN);
-
+            DrawText("Angle:"+calcAngle(dudePos),20,300,300,ORANGE);
             //first move all pizzas
             movePizzas(pizzaArray);
 
