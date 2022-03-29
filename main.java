@@ -43,10 +43,11 @@ public class main {
        double mouseX = GetMouseX();
        double mouseY = GetMouseY();
 
-       //double Angle = Math.atan((x-mouseX)/(y-mouseY));
-       double Angle = Math.atan2(y-mouseY,x-mouseX) * 180 / Math.PI;;
+       //calculate in what angle player is looking
+       double Angle = Math.atan2(y-mouseY,x-mouseX) * 180 / Math.PI;
        if(Angle < 0)
        {
+           //if angle lower than 0 add 360 to fix for full circle solution
            Angle = Angle + 360;
        }
        //double degrees = (Angle + 360) % 360;
@@ -55,47 +56,37 @@ public class main {
 
     public static void moveAlongVector(pizza pie)
     {
-        //increase ttl so steps will be taken
+        //increase ttl so steps will be taken -- higher value = faster movement
         pie.setTtl(0.5f);
         double x = getX(pie.getTtl(), pie.getAngle());
         double y = getY(pie.getTtl(), pie.getAngle());
 
-        double beforeX = pie.getWorldPos().x();
-        double beforeY = pie.getWorldPos().y();
+        //convert to float
         float yF = (float)y;
         float xF = (float)x;
 
-
-
-            pie.getWorldPos().y(pie.getWorldPos().y() + yF);
-
-
-
-
-            pie.getWorldPos().x(pie.getWorldPos().x() + xF);
-        double afterX = pie.getWorldPos().x();
-        double afterY = pie.getWorldPos().y();
+        //add the calculated tangents to world positions
+        pie.getWorldPos().y(pie.getWorldPos().y() - yF);
+        pie.getWorldPos().x(pie.getWorldPos().x() - xF);
 
 
     }
 
     public static double getX(double length_R, double Angle)
     {
-        double X = length_R * Math.cos(Math.toRadians(Angle));
-        return X;
+        return length_R * Math.cos(Math.toRadians(Angle));
     }
 
     public static double getY(double length_R, double Angle)
     {
-        double Y = length_R * Math.sin(Math.toRadians(Angle));
-
-        return Y;
+        return length_R * Math.sin(Math.toRadians(Angle));
     }
 
     public static void movePizzas(ArrayList<pizza>  pizzaArray)
     {
         for (pizza p:  pizzaArray){
             /*
+            //static horizontal and vertical movement
             switch (p.getDirection())
             {
                 case "up": p.getWorldPos().y(p.getWorldPos().y() - 2.0f);
@@ -106,7 +97,6 @@ public class main {
                     break;
                 case "right": p.getWorldPos().x(p.getWorldPos().x() - 2.0f);
                     break;
-
             }
             */
             moveAlongVector(p);
@@ -128,7 +118,7 @@ public class main {
         SetTargetFPS(60);
 
         //create array of pizzas to be shot and drawn
-        ArrayList<pizza> pizzaArray = new ArrayList<pizza>();
+        ArrayList<pizza> pizzaArray = new ArrayList<>();
 
 
         float screenHeight = GetScreenHeight();
