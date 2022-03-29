@@ -165,7 +165,7 @@ public class main {
             }
             if (IsKeyPressed(KEY_T))
             {
-                var y = 4;
+                
             }
             DrawText(dudeAngle, 50, 100, 100, GREEN);
             DrawText("Angle:"+calcAngle(dudePos),20,300,300,ORANGE);
