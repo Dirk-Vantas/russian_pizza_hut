@@ -14,7 +14,7 @@ public class customer {
 
     public void spawn(ArrayList<customer> customer_list)
     {
-        //get refrence to self
+        //get reference to self
         var self = this;
         //add into customer list
         customer_list.add(self);
