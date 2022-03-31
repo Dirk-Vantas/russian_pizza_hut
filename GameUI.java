@@ -1,5 +1,6 @@
 import com.raylib.Jaylib.*;
 import com.raylib.Jaylib.Vector2;
+import com.raylib.Raylib;
 
 import java.util.ArrayList;
 
@@ -13,6 +14,8 @@ public class GameUI {
 
     private Vector2 dudePos, dudeBody;
     private String dudeAngle;
+    Texture2D player;
+    float screenHeight, screenWidth;
 
     private void draw(float dudePosX, float dudePosY)
     {
@@ -103,7 +106,7 @@ public class GameUI {
         }
     }
 
-    public static void drawPizzas(ArrayList<pizza>  pizzaArray)
+    private void drawPizzas(ArrayList<pizza>  pizzaArray)
     {
         for (pizza p:  pizzaArray){
             DrawText("A:"+p.getAngle(),Math.round(p.getWorldPos().x()),Math.round(p.getWorldPos().y())-40,20,BLACK);
@@ -112,7 +115,7 @@ public class GameUI {
         }
     }
 
-    private static void CreateWindow()
+    private void CreateWindow()
     {
         InitWindow(1920, 1080, "Demo");
         SetTargetFPS(60);
@@ -134,7 +137,12 @@ public class GameUI {
         //getAngle();
         //draw call with position of the main dude
         draw(dudePos.x(), dudePos.y());
-        DrawRectangleV(dudePos,dudeBody, MAGENTA);
+        //DrawRectangleV(dudePos,dudeBody, MAGENTA);
+
+        //Draw the Character
+        DrawTextureV(player, dudePos, WHITE );
+
+        //Ends the Drawing
         EndDrawing();
     }
 
@@ -147,13 +155,16 @@ public class GameUI {
         //ArrayList<pizza> pizzaArray = new ArrayList<>();
 
 
-        float screenHeight = GetScreenHeight();
-        float screenWidth = GetScreenWidth();
+        screenHeight = GetScreenHeight();
+        screenWidth = GetScreenWidth();
         dudeAngle = "up";
 
         //initialize both dude position and the size of his body
         dudePos = new Vector2( screenWidth/2, screenHeight/2);
         dudeBody = new Vector2( 50,50);
+
+        // give player start png
+        player = LoadTexture("Bilder/Charakter/Charakter.png");
 
         //initialize mouse vector
         Vector2 mousePos = new Vector2(GetMouseX(),GetMouseY());
@@ -184,11 +195,13 @@ public class GameUI {
             if (IsKeyDown(KEY_W))
             {
                 dudeAngle = "up";
+                player = LoadTexture("Bilder/Charakter/Charakter_behind.png");
                 dudePos.y(Posy - 2.0f);
             }
             if (IsKeyDown(KEY_S))
             {
                 dudeAngle = "down";
+                player = LoadTexture("Bilder/Charakter/Charakter.png");
                 dudePos.y(Posy + 2.0f);
             }
             if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
