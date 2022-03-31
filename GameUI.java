@@ -8,7 +8,7 @@ public class GameUI {
 
     private Vector2 dudePos, dudeBody;
     private String dudeAngle;
-    Texture2D player;
+    Texture2D player, pizza;
     float screenHeight, screenWidth;
 
     private void draw(float dudePosX, float dudePosY)
@@ -104,8 +104,8 @@ public class GameUI {
     {
         for (pizza p:  pizzaArray){
             DrawText("A:"+p.getAngle(),Math.round(p.getWorldPos().x()),Math.round(p.getWorldPos().y())-40,20,BLACK);
-            DrawCircleV(p.getWorldPos(), p.getSize(), RED);
-
+            //DrawCircleV(p.getWorldPos(), p.getSize(), RED);
+            DrawTextureV(pizza, p.getWorldPos(), WHITE);
         }
     }
 
@@ -151,7 +151,7 @@ public class GameUI {
         //DrawRectangleV(dudePos,dudeBody, MAGENTA);
 
         //Draw the Character
-        DrawTextureV(player, dudePos, WHITE );
+        DrawTextureV(player, dudePos, WHITE);
 
         //Ends the Drawing
         EndDrawing();
@@ -176,8 +176,13 @@ public class GameUI {
 
         Vector2 jerryPos= new Vector2(50,50);
 
-        // give player start png
+        // Load Textures
         player = LoadTexture("Bilder/Charakter/Charakter.png");
+        pizza = LoadTexture("Bilder/Projectile/Projectile_pizza.png");
+
+        // preload for behind back left right
+        Texture2D front = LoadTexture("Bilder/Charakter/Charakter.png");
+        Texture2D behind = LoadTexture("Bilder/Charakter/Charakter_behind.png");
 
         //initialize mouse vector
         Vector2 mousePos = new Vector2(GetMouseX(),GetMouseY());
@@ -217,13 +222,13 @@ public class GameUI {
             if (IsKeyDown(KEY_W))
             {
                 dudeAngle = "up";
-                player = LoadTexture("Bilder/Charakter/Charakter_behind.png");
+                player = behind;
                 dudePos.y(Posy - 2.0f);
             }
             if (IsKeyDown(KEY_S))
             {
                 dudeAngle = "down";
-                player = LoadTexture("Bilder/Charakter/Charakter.png");
+                player = front;
                 dudePos.y(Posy + 2.0f);
             }
             if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
