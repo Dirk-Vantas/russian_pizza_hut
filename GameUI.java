@@ -182,10 +182,24 @@ public class GameUI {
         //initialize mouse vector
         Vector2 mousePos = new Vector2(GetMouseX(),GetMouseY());
 
+
+
+
+        // Instanz vom Singleton
+        ArrayListCollection use = ArrayListCollection.getInstance();
+
         //initilize test customer
+        /*
+        for (int step = 0; step < 1; step++) {
+            customer jerry = new customer(jerryPos,1,32,32);
+            use.addCustomer(jerry);
+        }
+        */
         customer jerry = new customer(jerryPos,1,32,32);
-        jerry.spawn(jerryPos);
-        jerry.spawn(jerryPos);
+        use.addCustomer(jerry);
+
+        customer berry = new customer(jerryPos,1,32,32);
+        use.addCustomer(berry);
 
 
 
@@ -229,7 +243,7 @@ public class GameUI {
             if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
             {
                 // Instanz vom Singleton
-                ArrayListCollection use = ArrayListCollection.getInstance();
+                use = ArrayListCollection.getInstance();
 
                 //pizza pizzaObj = new pizza(50,50, GetMouseX(),GetMouseY());
                 pizza pizzaObj = new pizza(20,50, dudePos.x(),dudePos.y(), calcAngle(dudePos));

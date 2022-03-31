@@ -28,16 +28,20 @@ public class AI {
     public void ai_tick_random() {
         ArrayListCollection use = ArrayListCollection.getInstance();
 
-        Random rand = new Random();
+
         //select how many options the tick switches between 0 and 3
         int ideas = 4;
         int attention = 30;
+        DrawText("thought 1:"+use.getCustomerList().get(0).thought ,300,300,20,ORANGE);
+        DrawText("Attention 1:"+use.getCustomerList().get(0).attention_span ,300,340,20,ORANGE);
+
+        DrawText("thought 2:"+use.getCustomerList().get(1).thought ,450,300,20,ORANGE);
+        DrawText("Attention 2:"+use.getCustomerList().get(1).attention_span ,450,340,20,ORANGE);
 
 
         for (customer p : use.getCustomerList()) {
 
-            DrawText("thought:"+p.thought ,300,300,20,ORANGE);
-            DrawText("Attention:"+p.attention_span ,300,340,20,ORANGE);
+
             //simple collsion detection
             if(p.worldPos.x() < 0)
             {
@@ -64,6 +68,7 @@ public class AI {
             }
 
             if (p.attention_span < 0) {
+                Random rand = new Random();
                 //if attention span has reduced to 0 customer will think up a new idea on where to go
                 p.thought = rand.nextInt(ideas);
                 //and reset is attention
@@ -75,16 +80,16 @@ public class AI {
                 switch (p.thought) {
                     //move customer left
                     case 0:
-                        p.worldPos.x(p.worldPos.x() - 3f);
+                        p.worldPos.x(p.worldPos.x() - 1f);
                         break;
                     case 1:
-                        p.worldPos.x(p.worldPos.x() + 3f);
+                        p.worldPos.x(p.worldPos.x() + 1f);
                         break;
                     case 2:
-                        p.worldPos.y(p.worldPos.y() - 3f);
+                        p.worldPos.y(p.worldPos.y() - 1f);
                         break;
                     case 3:
-                        p.worldPos.y(p.worldPos.y() + 3f);
+                        p.worldPos.y(p.worldPos.y() + 1f);
                         break;
                 }
 
