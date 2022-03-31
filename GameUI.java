@@ -1,13 +1,7 @@
-import com.raylib.Jaylib.*;
 import com.raylib.Jaylib.Vector2;
-import com.raylib.Raylib;
-
 import java.util.ArrayList;
-
 import static com.raylib.Jaylib.*;
-import static com.raylib.Raylib.*;
 import static com.raylib.Raylib.CloseWindow;
-import static com.raylib.Raylib.DrawRectangleV;
 import static com.raylib.Raylib.EndDrawing;
 
 public class GameUI {
@@ -115,11 +109,21 @@ public class GameUI {
         }
     }
 
+    private void drawCustomer(ArrayList<customer> customerArrayList)
+    {
+        //get instance of all arraylists
+        ArrayListCollection use = ArrayListCollection.getInstance();
+        for(customer p: customerArrayList)
+        {
+            DrawRectangle(Math.round(p.worldPos.x()),Math.round(p.worldPos.y()),p.width,p.height,BROWN);
+        }
+    }
+
     private void CreateWindow()
     {
-        InitWindow(1920, 1080, "Demo");
+        InitWindow(800, 600, "Demo");
         SetTargetFPS(60);
-        ToggleFullscreen();
+        //ToggleFullscreen();
     }
 
     private void DrawEverything() {
@@ -127,11 +131,18 @@ public class GameUI {
         DrawText("Angle:"+calcAngle(dudePos),20,300,300,ORANGE);
 
         ArrayListCollection use = ArrayListCollection.getInstance();
+        AI jerrybrain = AI.getInstance();
+
+
         //first move all pizzas
         movePizzas(use.getPizzaList());
 
         //then draw all pizzas
         drawPizzas(use.getPizzaList());
+
+        jerrybrain.ai_tick_random();
+        //draw all customers currently spawned
+        drawCustomer(use.getCustomerList());
 
         BeginDrawing();
         //getAngle();
@@ -163,11 +174,22 @@ public class GameUI {
         dudePos = new Vector2( screenWidth/2, screenHeight/2);
         dudeBody = new Vector2( 50,50);
 
+        Vector2 jerryPos= new Vector2(50,50);
+
         // give player start png
         player = LoadTexture("Bilder/Charakter/Charakter.png");
 
         //initialize mouse vector
         Vector2 mousePos = new Vector2(GetMouseX(),GetMouseY());
+
+        //initilize test customer
+        customer jerry = new customer(jerryPos,1,32,32);
+        jerry.spawn(jerryPos);
+        jerry.spawn(jerryPos);
+
+
+
+
 
         System.out.println("Text is: "+GetMousePosition());
         while (!WindowShouldClose()) {
@@ -221,23 +243,6 @@ public class GameUI {
             }
 
             DrawEverything();
-
-            //DrawText(dudeAngle, 50, 100, 100, GREEN);
-            //DrawText("Angle:"+calcAngle(dudePos),20,300,300,ORANGE);
-
-            //ArrayListCollection use = ArrayListCollection.getInstance();
-            //first move all pizzas
-            //movePizzas(use.getPizzaList());
-
-            //then draw all pizzas
-            //drawPizzas(use.getPizzaList());
-
-            //BeginDrawing();
-            //getAngle();
-            //draw call with position of the main dude
-            //draw(dudePos.x(), dudePos.y());
-            //DrawRectangleV(dudePos,dudeBody, MAGENTA);
-            //EndDrawing();
 
         }
         CloseWindow();

@@ -15,17 +15,29 @@ public class ArrayListCollection {
 
     //create array of pizzas to be shot and drawn
     private ArrayList<pizza> pizzaArray;
+    private ArrayList<customer> customerArray;
 
     public ArrayListCollection() {
+
         pizzaArray = new ArrayList<pizza>();
+        customerArray = new ArrayList<customer>();
+
     }
 
     public void addPizza(pizza p) {
         pizzaArray.add(p);
     }
-
     public ArrayList<pizza> getPizzaList() {
         return this.pizzaArray;
+    }
+
+    //create array of customers to be rendered and moved
+
+    public void addCustomer(customer p) {
+        customerArray.add(p);
+    }
+    public ArrayList<customer> getCustomerList() {
+        return this.customerArray;
     }
 
 }
