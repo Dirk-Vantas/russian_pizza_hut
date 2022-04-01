@@ -106,7 +106,7 @@ public class GameUI {
     private void drawPizzas(ArrayList<pizza>  pizzaArray)
     {
         for (pizza p:  pizzaArray){
-            DrawText("A:"+p.getAngle(),Math.round(p.getWorldPos().x()),Math.round(p.getWorldPos().y())-40,20,BLACK);
+            //DrawText("A:"+p.getAngle(),Math.round(p.getWorldPos().x()),Math.round(p.getWorldPos().y())-40,20,BLACK);
             //DrawCircleV(p.getWorldPos(), p.getSize(), RED);
             DrawTextureV(pizza, p.getWorldPos(), WHITE);
         }
@@ -133,11 +133,25 @@ public class GameUI {
 
     private void DrawEverything() {
         BeginDrawing();
-        DrawText(dudeAngle, 50, 100, 100, GREEN);
-        DrawText("Angle:"+calcAngle(dudePos),20,300,300,ORANGE);
+        //DrawText(dudeAngle, 50, 100, 100, GREEN);
+        //DrawText("Angle:"+calcAngle(dudePos),20,300,300,ORANGE);
 
         ArrayListCollection use = ArrayListCollection.getInstance();
         AI jerrybrain = AI.getInstance();
+
+        //check collisions before moving objects
+        //initialize collision manager obj
+        collision_manager collision = new collision_manager();
+
+        //check all coliders
+        if(collision.getCollision() != null)
+        {
+            System.out.println(collision.getCollision().name+"/");
+        }
+        else
+        {
+            //System.out.println("nothing hit");
+        }
 
 
         //first move all pizzas
@@ -195,25 +209,23 @@ public class GameUI {
         Vector2 mousePos = new Vector2(GetMouseX(),GetMouseY());
 
 
-
-
         // Instanz vom Singleton
         ArrayListCollection use = ArrayListCollection.getInstance();
 
-        //initilize test customer
-        /*
-        for (int step = 0; step < 1; step++) {
-            customer jerry = new customer(jerryPos,1,32,32);
-            use.addCustomer(jerry);
-        }
-        */
-        /*
-        customer jerry = new customer(jerryPos,1,32,32,2,"jerry");
-        use.addCustomer(jerry);
 
-        customer berry = new customer(jerryPos,1,32,32,3,"berry");
+
+        customer jerry = new customer(jerryPos.x()+50, jerryPos.y(), 1,32,32,2,"jerry");
+        customer herry = new customer(jerryPos.x()+100, jerryPos.y(), 1,32,32,2,"herry");
+        customer berry = new customer(jerryPos.x(), jerryPos.y()+50, 1,32,32,2,"berry");
+        customer derry = new customer(jerryPos.x(), jerryPos.y()+100, 1,32,32,2,"derry");
+        use.addCustomer(jerry);
+        use.addCustomer(herry);
         use.addCustomer(berry);
-*/
+        use.addCustomer(derry);
+
+
+
+
 
 
 
@@ -262,8 +274,8 @@ public class GameUI {
                 pizza pizzaObj = new pizza(20,50, dudePos.x(),dudePos.y(), calcAngle(dudePos));
 
 
-                customer berry = new customer(mousePos.x(),mousePos.y(),1,32,32,3,"berry");
-                use.addCustomer(berry);
+                //customer berry = new customer(mousePos.x(),mousePos.y(),1,32,32,3,"berry");
+                //use.addCustomer(berry);
 
 
 

@@ -5,13 +5,13 @@ import com.raylib.Raylib.Rectangle;
 import java.util.ArrayList;
 
 
-public class customer {
+public class customer implements Icollision_object{
 
     Vector2 worldPos;
     Rectangle collision_body;
     float speed;
-    int width;
-    int height;
+    float width;
+    float height;
     int angerLimit;
     //attention span in seconds
     int attention_span;
@@ -19,7 +19,7 @@ public class customer {
     String name;
 
 
-    public customer(float x,float y, float speed, int width, int height, int thought,String name)
+    public customer(float x,float y, float speed, float width, float height, int thought,String name)
     {
         this.worldPos = new Vector2(x,y);
         this.speed = speed;
@@ -34,6 +34,16 @@ public class customer {
     {
         return this.worldPos;
     }
+
+    public float getWidth()
+    {
+        return this.width;
+    }
+    public float getHeight()
+    {
+        return this.height;
+    }
+
 
 
 }

@@ -34,6 +34,7 @@ public class AI {
 
             DrawText("thought:"+p.thought ,Math.round(p.worldPos.x()),Math.round(p.worldPos.y())-100,20,ORANGE);
             DrawText("Attention 1:"+p.attention_span ,Math.round(p.worldPos.x()),Math.round(p.worldPos.y())-50,20,ORANGE);
+        DrawText(p.name ,Math.round(p.worldPos.x()),Math.round(p.worldPos.y())-30,20,ORANGE);
 
 
             //simple collsion detection
