@@ -16,27 +16,23 @@ public class customer {
     //attention span in seconds
     int attention_span;
     int thought;
+    String name;
 
 
-    public customer(Vector2 worldPos, float speed, int width, int height)
+    public customer(float x,float y, float speed, int width, int height, int thought,String name)
     {
-        this.worldPos = worldPos;
+        this.worldPos = new Vector2(x,y);
         this.speed = speed;
         this.width = width;
         this.height =  height;
         this.attention_span = 10;
+        this.thought = thought;
+        this.name= name;
     }
 
-    public void spawn(Vector2 jerryPos)
+    public Vector2 getWorldPos()
     {
-        // Instanz vom Singleton
-        ArrayListCollection use = ArrayListCollection.getInstance();
-
-        //get reference to self
-       //var self = this;
-        //add into customer list
-        customer jerry = new customer(jerryPos,1,32,32);
-        use.addCustomer(jerry);
+        return this.worldPos;
     }
 
 

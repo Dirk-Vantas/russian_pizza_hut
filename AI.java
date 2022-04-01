@@ -25,21 +25,15 @@ public class AI {
 
     }
 
-    public void ai_tick_random() {
-        ArrayListCollection use = ArrayListCollection.getInstance();
-
+    public void ai_tick_random(customer p) {
 
         //select how many options the tick switches between 0 and 3
         int ideas = 4;
         int attention = 30;
-        DrawText("thought 1:"+use.getCustomerList().get(0).thought ,300,300,20,ORANGE);
-        DrawText("Attention 1:"+use.getCustomerList().get(0).attention_span ,300,340,20,ORANGE);
-
-        DrawText("thought 2:"+use.getCustomerList().get(1).thought ,450,300,20,ORANGE);
-        DrawText("Attention 2:"+use.getCustomerList().get(1).attention_span ,450,340,20,ORANGE);
 
 
-        for (customer p : use.getCustomerList()) {
+            DrawText("thought:"+p.thought ,Math.round(p.worldPos.x()),Math.round(p.worldPos.y())-100,20,ORANGE);
+            DrawText("Attention 1:"+p.attention_span ,Math.round(p.worldPos.x()),Math.round(p.worldPos.y())-50,20,ORANGE);
 
 
             //simple collsion detection
@@ -96,5 +90,5 @@ public class AI {
             }
             p.attention_span = p.attention_span -1;
         }
-    }
+
 }

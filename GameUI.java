@@ -1,5 +1,7 @@
 import com.raylib.Jaylib.Vector2;
 import java.util.ArrayList;
+import java.util.Random;
+
 import static com.raylib.Jaylib.*;
 import static com.raylib.Raylib.CloseWindow;
 import static com.raylib.Raylib.EndDrawing;
@@ -82,21 +84,22 @@ public class GameUI {
     private void movePizzas(ArrayList<pizza> pizzaArray)
     {
         for (pizza p:  pizzaArray){
-            /*
-            //static horizontal and vertical movement
-            switch (p.getDirection())
-            {
-                case "up": p.getWorldPos().y(p.getWorldPos().y() - 2.0f);
-                    break;
-                case "down": p.getWorldPos().y(p.getWorldPos().y() + 2.0f);
-                    break;
-                case "left": p.getWorldPos().x(p.getWorldPos().x() + 2.0f);
-                    break;
-                case "right": p.getWorldPos().x(p.getWorldPos().x() - 2.0f);
-                    break;
-            }
-            */
             moveAlongVector(p);
+        }
+    }
+
+    private void moveCustomerAlong(customer p)
+    {
+
+    }
+
+
+    private void moveCustomer(ArrayList<customer> customerArrayList,AI controller)
+    {
+        for(customer p : customerArrayList)
+        {
+            //manipulate walking direction controlled by AI class
+            controller.ai_tick_random(p);
         }
     }
 
@@ -115,7 +118,9 @@ public class GameUI {
         ArrayListCollection use = ArrayListCollection.getInstance();
         for(customer p: customerArrayList)
         {
-            DrawRectangle(Math.round(p.worldPos.x()),Math.round(p.worldPos.y()),p.width,p.height,BROWN);
+
+            DrawRectangleV(p.getWorldPos(),new Vector2(p.height,p.width),BROWN);
+            //DrawTextureV(pizza, p.getWorldPos(), WHITE);
         }
     }
 
@@ -127,6 +132,7 @@ public class GameUI {
     }
 
     private void DrawEverything() {
+        BeginDrawing();
         DrawText(dudeAngle, 50, 100, 100, GREEN);
         DrawText("Angle:"+calcAngle(dudePos),20,300,300,ORANGE);
 
@@ -140,11 +146,12 @@ public class GameUI {
         //then draw all pizzas
         drawPizzas(use.getPizzaList());
 
-        jerrybrain.ai_tick_random();
+        //pass customer list and AI controller obj into move customer method
+        moveCustomer(use.getCustomerList(),jerrybrain);
         //draw all customers currently spawned
         drawCustomer(use.getCustomerList());
 
-        BeginDrawing();
+
         //getAngle();
         //draw call with position of the main dude
         draw(dudePos.x(), dudePos.y());
@@ -200,12 +207,13 @@ public class GameUI {
             use.addCustomer(jerry);
         }
         */
-        customer jerry = new customer(jerryPos,1,32,32);
+        /*
+        customer jerry = new customer(jerryPos,1,32,32,2,"jerry");
         use.addCustomer(jerry);
 
-        customer berry = new customer(jerryPos,1,32,32);
+        customer berry = new customer(jerryPos,1,32,32,3,"berry");
         use.addCustomer(berry);
-
+*/
 
 
 
@@ -252,6 +260,11 @@ public class GameUI {
 
                 //pizza pizzaObj = new pizza(50,50, GetMouseX(),GetMouseY());
                 pizza pizzaObj = new pizza(20,50, dudePos.x(),dudePos.y(), calcAngle(dudePos));
+
+
+                customer berry = new customer(mousePos.x(),mousePos.y(),1,32,32,3,"berry");
+                use.addCustomer(berry);
+
 
 
                 use.addPizza(pizzaObj);
