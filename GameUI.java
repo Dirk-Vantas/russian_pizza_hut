@@ -204,6 +204,10 @@ public class GameUI {
         // preload for behind back left right
         Texture2D front = LoadTexture("Bilder/Charakter/Charakter.png");
         Texture2D behind = LoadTexture("Bilder/Charakter/Charakter_behind.png");
+        Texture2D left = LoadTexture("Bilder/Charakter/Charakter_left.png");
+        Texture2D right = LoadTexture("Bilder/Charakter/Charakter_right.png");
+
+
 
         //initialize mouse vector
         Vector2 mousePos = new Vector2(GetMouseX(),GetMouseY());
@@ -245,11 +249,13 @@ public class GameUI {
 
             if (IsKeyDown(KEY_D)) {
                 dudeAngle = "left";
+                player = right;
                 dudePos.x(Posx + 2f);
             }
             if (IsKeyDown(KEY_A))
             {
                 dudeAngle = "right";
+                player = left;
                 dudePos.x(Posx - 2.0f);
             }
 
