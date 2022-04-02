@@ -217,11 +217,11 @@ public class GameUI {
         customer jerry = new customer(jerryPos.x()+50, jerryPos.y(), 1,32,32,2,"jerry");
         customer herry = new customer(jerryPos.x()+100, jerryPos.y(), 1,32,32,2,"herry");
         customer berry = new customer(jerryPos.x(), jerryPos.y()+50, 1,32,32,2,"berry");
-        customer derry = new customer(jerryPos.x(), jerryPos.y()+100, 1,32,32,2,"derry");
+        customer lerry = new customer(jerryPos.x(), jerryPos.y()+100, 1,32,32,2,"lerry");
         use.addCustomer(jerry);
         use.addCustomer(herry);
         use.addCustomer(berry);
-        use.addCustomer(derry);
+        use.addCustomer(lerry);
 
 
 

@@ -75,16 +75,16 @@ public class AI {
                 switch (p.thought) {
                     //move customer left
                     case 0:
-                        p.worldPos.x(p.worldPos.x() - 1f);
+                        p.worldPos.x(p.worldPos.x() - 3f);
                         break;
                     case 1:
-                        p.worldPos.x(p.worldPos.x() + 1f);
+                        p.worldPos.x(p.worldPos.x() + 3f);
                         break;
                     case 2:
-                        p.worldPos.y(p.worldPos.y() - 1f);
+                        p.worldPos.y(p.worldPos.y() - 3f);
                         break;
                     case 3:
-                        p.worldPos.y(p.worldPos.y() + 1f);
+                        p.worldPos.y(p.worldPos.y() + 3f);
                         break;
                 }
 
