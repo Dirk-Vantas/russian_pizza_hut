@@ -3,14 +3,14 @@ import com.raylib.Jaylib.Vector2;
 
 public class pizza {
 
-    float size;
-    float speed;
-    Vector2 world_pos;
-    float worldspaceX;
-    float worldspaceY;
+    private float size;
+    private float speed;
+    private Vector2 world_pos;
+    private float worldspaceX;
+    private float worldspaceY;
 
-    double ttl;
-    double angle;
+    private double ttl;
+    private double angle;
 
     public pizza(float size, float speed, float worldspaceX, float worldspaceY, double angle) {
         this.size = size;

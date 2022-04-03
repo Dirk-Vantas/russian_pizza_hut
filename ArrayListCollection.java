@@ -16,13 +16,13 @@ public class ArrayListCollection {
     //create array of pizzas to be shot and drawn
     private ArrayList<pizza> pizzaArray;
     private ArrayList<customer> customerArray;
-    //private ArrayList<> WallArray;
+    private ArrayList<Tiles> TileArray;
 
     public ArrayListCollection() {
 
         pizzaArray = new ArrayList<pizza>();
         customerArray = new ArrayList<customer>();
-
+        TileArray = new ArrayList<Tiles>();
     }
 
     public void addPizza(pizza p) {
@@ -39,6 +39,11 @@ public class ArrayListCollection {
     }
     public ArrayList<customer> getCustomerList() {
         return this.customerArray;
+    }
+
+    public  void addTile(Tiles t) { TileArray.add(t); }
+    public ArrayList<Tiles> getTilesList() {
+        return this.TileArray;
     }
 
 }
