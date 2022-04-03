@@ -1,7 +1,5 @@
 import com.raylib.Jaylib.Vector2;
 import java.util.ArrayList;
-import java.util.Random;
-
 import static com.raylib.Jaylib.*;
 import static com.raylib.Raylib.CloseWindow;
 import static com.raylib.Raylib.EndDrawing;
@@ -98,8 +96,11 @@ public class GameUI {
     {
         for(customer p : customerArrayList)
         {
-            //manipulate walking direction controlled by AI class
-            controller.ai_tick_random(p);
+            //if customer is not dead
+            if(p.customer_state != 3) {
+                //manipulate walking direction controlled by AI class
+                controller.customer_ai_tick(p);
+            }
         }
     }
 
@@ -118,9 +119,10 @@ public class GameUI {
         ArrayListCollection use = ArrayListCollection.getInstance();
         for(customer p: customerArrayList)
         {
-
-            DrawRectangleV(p.getWorldPos(),new Vector2(p.height,p.width),BROWN);
-            //DrawTextureV(pizza, p.getWorldPos(), WHITE);
+            if(p.customer_state != 3) {
+                DrawRectangleV(p.getWorldPos(), new Vector2(p.height, p.width), BROWN);
+                //DrawTextureV(pizza, p.getWorldPos(), WHITE);
+            }
         }
     }
 
@@ -128,7 +130,7 @@ public class GameUI {
     {
         InitWindow(640, 480, "Demo");
         SetTargetFPS(60);
-        ToggleFullscreen();
+        //ToggleFullscreen();
     }
 
     private void DrawEverything() {
@@ -220,14 +222,9 @@ public class GameUI {
 
 
 
-        customer jerry = new customer(jerryPos.x()+50, jerryPos.y(), 1,32,32,2,"jerry");
-        customer herry = new customer(jerryPos.x()+100, jerryPos.y(), 1,32,32,2,"herry");
-        customer berry = new customer(jerryPos.x(), jerryPos.y()+50, 1,32,32,2,"berry");
-        customer lerry = new customer(jerryPos.x(), jerryPos.y()+100, 1,32,32,2,"lerry");
+        customer jerry = new customer(30, 30,300,300, 1,32,32,300);
         use.addCustomer(jerry);
-        use.addCustomer(herry);
-        use.addCustomer(berry);
-        use.addCustomer(lerry);
+
 
 
 

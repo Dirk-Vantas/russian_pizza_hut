@@ -19,31 +19,27 @@ public class collision_manager {
         //initialize customer obj to be returned as null
         customer hit =null;
 
-        for(customer customer : use.getCustomerList())
-        {
-            for(pizza pie: use.getPizzaList())
-            {
-                Rectangle rect = new Rectangle();
-                rect.height(customer.getHeight());
-                rect.width(customer.getWidth());
-                rect.x(customer.getWorldPos().x());
-                rect.y(customer.getWorldPos().y());
+        for(customer customer : use.getCustomerList()) {
+            if (customer.customer_state != 3) {
+                for (pizza pie : use.getPizzaList()) {
+                    Rectangle rect = new Rectangle();
+                    rect.height(customer.getHeight());
+                    rect.width(customer.getWidth());
+                    rect.x(customer.getWorldPos().x());
+                    rect.y(customer.getWorldPos().y());
 
-                if(CheckCollisionCircleRec(pie.getWorldPos(), pie.getSize(), rect) == true)
-                {
-                    hit = customer;
-                    //if collision is found break out of the for loop
+                    if (CheckCollisionCircleRec(pie.getWorldPos(), pie.getSize(), rect) == true) {
+                        hit = customer;
+                        //if collision is found break out of the for loop
+                        break;
+                    } else {
+                        hit = null;
+                    }
+                }
+                if (hit != null) {
+                    //if collsion was found earlier break out of nested for loop aswell
                     break;
                 }
-                else
-                {
-                    hit = null;
-                }
-            }
-            if(hit != null)
-            {
-                //if collsion was found earlier break out of nested for loop aswell
-                break;
             }
         }
         return hit;
