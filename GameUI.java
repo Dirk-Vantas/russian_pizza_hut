@@ -126,9 +126,9 @@ public class GameUI {
 
     private void CreateWindow()
     {
-        InitWindow(800, 600, "Demo");
+        InitWindow(640, 480, "Demo");
         SetTargetFPS(60);
-        //ToggleFullscreen();
+        ToggleFullscreen();
     }
 
     private void DrawEverything() {
@@ -206,6 +206,8 @@ public class GameUI {
         Texture2D behind = LoadTexture("Bilder/Charakter/Charakter_behind.png");
         Texture2D left = LoadTexture("Bilder/Charakter/Charakter_left.png");
         Texture2D right = LoadTexture("Bilder/Charakter/Charakter_right.png");
+
+
 
 
 

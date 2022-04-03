@@ -16,6 +16,7 @@ public class ArrayListCollection {
     //create array of pizzas to be shot and drawn
     private ArrayList<pizza> pizzaArray;
     private ArrayList<customer> customerArray;
+    //private ArrayList<> WallArray;
 
     public ArrayListCollection() {
 
