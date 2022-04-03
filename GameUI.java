@@ -10,7 +10,7 @@ public class GameUI {
 
     private Vector2 dudePos, dudeBody;
     private String dudeAngle;
-    Texture2D player, pizza;
+    private Texture2D player, pizza, Wall, Wall_doorentrance, Wall_edge, Wall_edgekitdoorleft, Wall_edgekitdoorright, Wall_windowbottom, Wall_kitdoorleft, Wall_kitdoorright, Wall_kitdoortop, Wall_windowtop, Floor, Floor_dirty1, Floor_dirty2, Floor_doorkitbottom;
     float screenHeight, screenWidth;
 
     private void draw(float dudePosX, float dudePosY)
@@ -115,7 +115,6 @@ public class GameUI {
     private void drawCustomer(ArrayList<customer> customerArrayList)
     {
         //get instance of all arraylists
-        ArrayListCollection use = ArrayListCollection.getInstance();
         for(customer p: customerArrayList)
         {
 
@@ -123,6 +122,14 @@ public class GameUI {
             //DrawTextureV(pizza, p.getWorldPos(), WHITE);
         }
     }
+
+    private void drawMap(ArrayList<Tiles> TilesArrayList) {
+        for(Tiles t: TilesArrayList)
+        {
+            DrawTextureV(t.getTexture(), t.getWorldPos(), WHITE);
+        }
+    }
+
 
     private void CreateWindow()
     {
@@ -133,6 +140,7 @@ public class GameUI {
 
     private void DrawEverything() {
         BeginDrawing();
+
         //DrawText(dudeAngle, 50, 100, 100, GREEN);
         //DrawText("Angle:"+calcAngle(dudePos),20,300,300,ORANGE);
 
@@ -153,6 +161,7 @@ public class GameUI {
             //System.out.println("nothing hit");
         }
 
+        drawMap(use.getTilesList());
 
         //first move all pizzas
         movePizzas(use.getPizzaList());
@@ -176,6 +185,28 @@ public class GameUI {
 
         //Ends the Drawing
         EndDrawing();
+    }
+
+    private void FillTileArray() {
+        ArrayListCollection use = ArrayListCollection.getInstance();
+        Texture2D texture = Wall;
+
+        for (float i = 0; i < 480; i=i+32) {
+            for (float j = 0; j < 640; j=j+32) {
+                Tiles tile = new Tiles(texture, j, i);
+                use.addTile(tile);
+            }
+
+            if (i == 32) {
+                texture = Wall_edge;
+            }
+
+            if (i == 64) {
+                texture = Floor;
+            }
+        }
+
+
     }
 
     public GameUI() {
@@ -207,8 +238,23 @@ public class GameUI {
         Texture2D left = LoadTexture("Bilder/Charakter/Charakter_left.png");
         Texture2D right = LoadTexture("Bilder/Charakter/Charakter_right.png");
 
+        // preload for wall
+        Wall = LoadTexture("Bilder/Wall/Wall.png");
+        Wall_doorentrance = LoadTexture("Bilder/Wall/Wall_doorentrance.png");
+        Wall_edge = LoadTexture("Bilder/Wall/Wall_edge.png");
+        Wall_edgekitdoorleft = LoadTexture("Bilder/Wall/Wall_edgekitdoorleft.png");
+        Wall_edgekitdoorright = LoadTexture("Bilder/Wall/Wall_edgekitdoorright.png");
+        Wall_windowbottom = LoadTexture("Bilder/Wall/Wall_windowbottom.png");
+        Wall_kitdoorleft = LoadTexture("Bilder/Wall/Wall_kitdoorleft.png");
+        Wall_kitdoorright = LoadTexture("Bilder/Wall/Wall_kitdoorright.png");
+        Wall_kitdoortop = LoadTexture("Bilder/Wall/Wall_kitdoortop.png");
+        Wall_windowtop = LoadTexture("Bilder/Wall/Wall_windowtop.png");
 
-
+        // preload for floor
+        Floor = LoadTexture("Bilder/Floor/Floor.png");
+        Floor_dirty1 = LoadTexture("Bilder/Floor/Floor_dirty1.png");
+        Floor_dirty2 = LoadTexture("Bilder/Floor/Floor_dirty2.png");
+        Floor_doorkitbottom = LoadTexture("Bilder/Floor/Floor_doorkitbottom.png");
 
 
         //initialize mouse vector
@@ -231,7 +277,7 @@ public class GameUI {
 
 
 
-
+        FillTileArray();
 
 
 
