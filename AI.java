@@ -114,7 +114,7 @@ public class AI {
 
             ArrayList<customer> customers = use.getCustomerList();
             //use.getCustomerList().remove(p);
-            use.getPizzaList().remove(use.getCustomerList().indexOf(p));
+            //use.getPizzaList().remove(use.getCustomerList().indexOf(p));
 
         }
     }
