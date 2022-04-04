@@ -9,6 +9,7 @@ public class GameUI {
     private Vector2 dudePos, dudeBody;
     private String dudeAngle;
     private Texture2D player, pizza, Wall, Wall_doorentrance, Wall_edge, Wall_edgekitdoorleft, Wall_edgekitdoorright, Wall_windowbottom, Wall_kitdoorleft, Wall_kitdoorright, Wall_kitdoortop, Wall_windowtop, Floor, Floor_dirty1, Floor_dirty2, Floor_doorkitbottom;
+    private Texture2D Cashregister_bottomleft,Cashregister_bottommiddle,Cashregister_bottomright,Cashregister_extrabottom,Cashregister_extratop,Cashregister_topleft,Cashregister_topmiddle,Cashregister_topright;
     float screenHeight, screenWidth;
     GameController gameObj;
 
@@ -279,6 +280,16 @@ public class GameUI {
         Wall_kitdoorright = LoadTexture("Bilder/Wall/Wall_kitdoorright.png");
         Wall_kitdoortop = LoadTexture("Bilder/Wall/Wall_kitdoortop.png");
         Wall_windowtop = LoadTexture("Bilder/Wall/Wall_windowtop.png");
+
+        //preload cash register
+        Cashregister_bottomleft = LoadTexture("Bilder/Furniture/Cashregister_bottomleft.png");
+        Cashregister_bottommiddle = LoadTexture("Bilder/Furniture/Cashregister_bottommiddle.png");
+        Cashregister_bottomright = LoadTexture("Bilder/Furniture/Cashregister_bottomright.png");
+        Cashregister_extrabottom = LoadTexture("Bilder/Furniture/Cashregister_extrabottom.png");
+        Cashregister_extratop = LoadTexture("Bilder/Furniture/Cashregister_extratop.png");
+        Cashregister_topleft = LoadTexture("Bilder/Furniture/Cashregister_topleft.png");
+        Cashregister_topmiddle = LoadTexture("Bilder/Furniture/Cashregister_topmiddle.png");
+        Cashregister_topright = LoadTexture("Bilder/Furniture/Cashregister_topright.png");
 
         // preload for floor
         Floor = LoadTexture("Bilder/Floor/Floor.png");
