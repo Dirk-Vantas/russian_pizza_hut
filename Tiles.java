@@ -20,6 +20,8 @@ public class Tiles {
         return this.texture;
     }
 
-
+    public void setTexture(Raylib.Texture2D texture) {
+        this.texture = texture;
+    }
 
 }

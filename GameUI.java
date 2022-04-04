@@ -137,7 +137,7 @@ public class GameUI {
     {
         InitWindow(640, 480, "Demo");
         SetTargetFPS(60);
-        //ToggleFullscreen();
+        ToggleFullscreen();
     }
 
     private void DrawEverything() {
@@ -193,12 +193,8 @@ public class GameUI {
         ArrayListCollection use = ArrayListCollection.getInstance();
         Texture2D texture = Wall;
 
+        // Place tiles (Floor and Wall in automation)
         for (float i = 0; i < 480; i=i+32) {
-            for (float j = 0; j < 640; j=j+32) {
-                Tiles tile = new Tiles(texture, j, i);
-                use.addTile(tile);
-            }
-
             if (i == 32) {
                 texture = Wall_edge;
             }
@@ -206,9 +202,25 @@ public class GameUI {
             if (i == 64) {
                 texture = Floor;
             }
+
+            for (float j = 0; j < 640; j=j+32) {
+                Tiles tile = new Tiles(texture, j, i);
+                use.addTile(tile);
+            }
         }
 
+        // customizeable Tiles (Kitchen Door)
+        use.replaceTexture(9, Wall_kitdoorleft);
+        use.replaceTexture(10, Wall_kitdoortop);
+        use.replaceTexture(11, Wall_kitdoorright);
+        use.replaceTexture(29, Wall_edgekitdoorleft);
+        use.replaceTexture(30, Wall_doorentrance);
+        use.replaceTexture(31, Wall_edgekitdoorright);
+        use.replaceTexture(50, Floor_doorkitbottom);
 
+
+        use.replaceTexture(15, Wall_windowtop);
+        use.replaceTexture(35, Wall_windowbottom);
     }
 
     public GameUI() {
@@ -246,7 +258,7 @@ public class GameUI {
         Wall_edge = LoadTexture("Bilder/Wall/Wall_edge.png");
         Wall_edgekitdoorleft = LoadTexture("Bilder/Wall/Wall_edgekitdoorleft.png");
         Wall_edgekitdoorright = LoadTexture("Bilder/Wall/Wall_edgekitdoorright.png");
-        Wall_windowbottom = LoadTexture("Bilder/Wall/Wall_windowbottom.png");
+        Wall_windowbottom = LoadTexture("Bilder/Wall/Wall_edgewindowbottom.png");
         Wall_kitdoorleft = LoadTexture("Bilder/Wall/Wall_kitdoorleft.png");
         Wall_kitdoorright = LoadTexture("Bilder/Wall/Wall_kitdoorright.png");
         Wall_kitdoortop = LoadTexture("Bilder/Wall/Wall_kitdoortop.png");

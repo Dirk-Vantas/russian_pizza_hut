@@ -1,3 +1,5 @@
+import com.raylib.Raylib;
+
 import java.util.ArrayList;
 
 public class ArrayListCollection {
@@ -19,7 +21,7 @@ public class ArrayListCollection {
     private ArrayList<Tiles> TileArray;
 
     public ArrayListCollection() {
-
+        // Instance
         pizzaArray = new ArrayList<pizza>();
         customerArray = new ArrayList<customer>();
         TileArray = new ArrayList<Tiles>();
@@ -44,6 +46,12 @@ public class ArrayListCollection {
     public  void addTile(Tiles t) { TileArray.add(t); }
     public ArrayList<Tiles> getTilesList() {
         return this.TileArray;
+    }
+
+    public void replaceTexture(int index, Raylib.Texture2D path) {
+        Tiles tile = TileArray.get(index);
+        tile.setTexture(path);
+        TileArray.set(index, tile);
     }
 
 }
