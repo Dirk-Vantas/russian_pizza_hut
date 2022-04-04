@@ -195,10 +195,18 @@ public class GameUI {
         //Draw the Character
         DrawTextureV(player, dudePos, WHITE);
 
+        DrawFurniture(use.getFurnitureArray());
+
         //draw UI on top
         drawUI();
         //Ends the Drawing
         EndDrawing();
+    }
+
+    private void DrawFurniture(ArrayList<Tiles> tiles) {
+        for (Tiles f : tiles) {
+            DrawTextureV(f.getTexture(), f.getWorldPos(), WHITE);
+        }
     }
 
     private void FillTileArray() {
@@ -236,7 +244,22 @@ public class GameUI {
 
 
         // furniture
-        //use.makeTile(54, );
+        use.makeTile(54, Cashregister_topleft);
+        use.makeTile(55, Cashregister_extratop);
+        use.makeTile(56, Cashregister_topmiddle);
+        use.makeTile(57, Cashregister_topmiddle);
+        use.makeTile(58, Cashregister_topmiddle);
+        use.makeTile(59, Cashregister_topright);
+
+        use.makeTile(74, Cashregister_bottomleft);
+        use.makeTile(75, Cashregister_extrabottom);
+        use.makeTile(76, Cashregister_bottommiddle);
+        use.makeTile(77, Cashregister_bottommiddle);
+        use.makeTile(78, Cashregister_bottommiddle);
+        use.makeTile(79, Cashregister_bottomright);
+
+        use.makeTile();
+
 
     }
 
