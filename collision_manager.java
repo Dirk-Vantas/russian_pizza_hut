@@ -11,7 +11,7 @@ import static com.raylib.Raylib.EndDrawing;
 public class collision_manager {
     //this class will manage all collission detection logic
 
-    public customer getCollision()
+    public customer getCollision(GameController game)
     {
         // Instanz vom Singleton
         ArrayListCollection use = ArrayListCollection.getInstance();
@@ -30,6 +30,16 @@ public class collision_manager {
 
                     if (CheckCollisionCircleRec(pie.getWorldPos(), pie.getSize(), rect) == true) {
                         hit = customer;
+                        if(customer.customer_state ==1) {
+                            //if customer is sitting down and waiting for an order he will be serverd
+                            customer.serve(new Vector2(30, 30));
+                            game.addPoint();
+                        }
+                        else
+                        {
+                            //if customer was hit and no pizza was requested Ie still walking or was already serverd deduct 1 point
+                            game.subtracktPoints();
+                        }
                         //if collision is found break out of the for loop
                         break;
                     } else {

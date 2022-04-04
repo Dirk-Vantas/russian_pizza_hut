@@ -10,6 +10,7 @@ public class GameUI {
     private String dudeAngle;
     private Texture2D player, pizza, Wall, Wall_doorentrance, Wall_edge, Wall_edgekitdoorleft, Wall_edgekitdoorright, Wall_windowbottom, Wall_kitdoorleft, Wall_kitdoorright, Wall_kitdoortop, Wall_windowtop, Floor, Floor_dirty1, Floor_dirty2, Floor_doorkitbottom;
     float screenHeight, screenWidth;
+    GameController gameObj;
 
     private void draw(float dudePosX, float dudePosY)
     {
@@ -132,6 +133,11 @@ public class GameUI {
         }
     }
 
+    private void drawUI()
+    {
+        DrawText("POINTS:"+gameObj.round_points ,10,10,30,BLUE);
+    }
+
 
     private void CreateWindow()
     {
@@ -142,6 +148,9 @@ public class GameUI {
 
     private void DrawEverything() {
         BeginDrawing();
+
+
+
 
         //DrawText(dudeAngle, 50, 100, 100, GREEN);
         //DrawText("Angle:"+calcAngle(dudePos),20,300,300,ORANGE);
@@ -154,9 +163,9 @@ public class GameUI {
         collision_manager collision = new collision_manager();
 
         //check all coliders
-        if(collision.getCollision() != null)
+        if(collision.getCollision(gameObj) != null)
         {
-            System.out.println(collision.getCollision().name+"/");
+            System.out.println(collision.getCollision(gameObj).name+"/");
         }
         else
         {
@@ -185,6 +194,8 @@ public class GameUI {
         //Draw the Character
         DrawTextureV(player, dudePos, WHITE);
 
+        //draw UI on top
+        drawUI();
         //Ends the Drawing
         EndDrawing();
     }
@@ -278,10 +289,13 @@ public class GameUI {
         // Instanz vom Singleton
         ArrayListCollection use = ArrayListCollection.getInstance();
 
-
+        gameObj = new GameController(20);
 
         customer jerry = new customer(30, 30,300,300, 1,32,32,300);
         use.addCustomer(jerry);
+
+        customer brenda = new karen(30, 30,300,300, 1,32,32,300);
+        use.addCustomer(brenda);
 
 
 

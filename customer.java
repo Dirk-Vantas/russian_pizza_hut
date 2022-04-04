@@ -77,8 +77,11 @@ public class customer implements Icollision_object{
 
     //gets called when customer has been server in time and needs to leave restaurant and be removed from arraylist
     public void serve(Vector2 door_position){
+        //customer wants to leave
+        this.customer_state = 2;
         this.goal = door_position;
         this.distance_to_cover = pizza_math.getVecDistance(this.worldPos,this.goal);
+        this.steps_last_taken = 0;
         //add logic to add points onto the scoreboard
         //get singelton game object add points to the scoreboard property
         // -->
@@ -111,12 +114,6 @@ public class customer implements Icollision_object{
     {
         return this.height;
     }
-
-
-
-
-
-
 
 
 }

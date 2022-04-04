@@ -20,11 +20,13 @@ public class ArrayListCollection {
     private ArrayList<customer> customerArray;
     private ArrayList<Tiles> TileArray;
 
+
     public ArrayListCollection() {
         // Instance
         pizzaArray = new ArrayList<pizza>();
         customerArray = new ArrayList<customer>();
         TileArray = new ArrayList<Tiles>();
+
     }
 
     public void addPizza(pizza p) {
