@@ -9,7 +9,11 @@ public class Tiles {
 
     public Tiles(Raylib.Texture2D texture, float worldspaceX, float worldspaceY) {
         this.texture = texture;
-        this.world_pos = new Vector2(worldspaceX, worldspaceY);
+        this.setWorld_pos(new Vector2(worldspaceX, worldspaceY));
+    }
+
+    public Tiles(Raylib.Texture2D texture) {
+        this.texture = texture;
     }
 
     public Jaylib.Vector2 getWorldPos() {
@@ -24,4 +28,7 @@ public class Tiles {
         this.texture = texture;
     }
 
+    public void setWorld_pos(Vector2 world_pos) {
+        this.world_pos = world_pos;
+    }
 }

@@ -58,4 +58,12 @@ public class ArrayListCollection {
         TileArray.set(index, tile);
     }
 
+    public void makeTile(int index, Raylib.Texture2D path) {
+        Jaylib.Vector2 vector = TileArray.get(index).getWorldPos();
+        Tiles tile = new Tiles(path);
+        tile.setWorld_pos(vector);
+
+        TileArray.add(tile);
+    }
+
 }

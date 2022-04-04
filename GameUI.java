@@ -229,9 +229,14 @@ public class GameUI {
         use.replaceTexture(31, Wall_edgekitdoorright);
         use.replaceTexture(50, Floor_doorkitbottom);
 
-
+        // wall window
         use.replaceTexture(15, Wall_windowtop);
         use.replaceTexture(35, Wall_windowbottom);
+
+
+        // furniture
+        use.makeTile(54, );
+
     }
 
     public GameUI() {
