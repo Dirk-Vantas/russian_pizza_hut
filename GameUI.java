@@ -11,6 +11,7 @@ public class GameUI {
     private Texture2D player, pizza, Wall, Wall_doorentrance, Wall_edge, Wall_edgekitdoorleft, Wall_edgekitdoorright, Wall_windowbottom, Wall_kitdoorleft, Wall_kitdoorright, Wall_kitdoortop, Wall_windowtop, Floor, Floor_dirty1, Floor_dirty2, Floor_doorkitbottom;
     private Texture2D Cashregister_bottomleft,Cashregister_bottommiddle,Cashregister_bottomright,Cashregister_extrabottom,Cashregister_extratop,Cashregister_topleft,Cashregister_topmiddle,Cashregister_topright;
     private Texture2D Chair_left, Chair_right, Table_begin, Table_middle, Table_end;
+    private Texture2D Floor_door, Wall_doormiddle, Wall_doortop, Wall_entrance, Wall_entrancetop;
     float screenHeight, screenWidth;
     GameController gameObj;
 
@@ -230,6 +231,14 @@ public class GameUI {
             }
         }
 
+        // replace some floors
+        use.replaceTexture(42 ,Floor_dirty1);
+        use.replaceTexture(93 ,Floor_dirty2);
+        use.replaceTexture(299 ,Floor_dirty1);
+        use.replaceTexture( 147,Floor_dirty2);
+        use.replaceTexture( 262,Floor_dirty1);
+        use.replaceTexture( 289,Floor_dirty2);
+
         // customizeable Tiles (Kitchen Door)
         use.replaceTexture(9, Wall_kitdoorleft);
         use.replaceTexture(10, Wall_kitdoortop);
@@ -238,6 +247,14 @@ public class GameUI {
         use.replaceTexture(30, Wall_doorentrance);
         use.replaceTexture(31, Wall_edgekitdoorright);
         use.replaceTexture(50, Floor_doorkitbottom);
+
+        // customizeable Tiles (Entrance)
+        use.replaceTexture(5, Wall_entrancetop);
+        use.replaceTexture(6, Wall_doortop);
+        use.replaceTexture(25, Wall_entrance);
+        use.replaceTexture(26, Wall_doormiddle);
+        use.replaceTexture(45, Floor_doorkitbottom);
+        use.replaceTexture(46, Floor_door);
 
         // wall window
         use.replaceTexture(15, Wall_windowtop);
@@ -342,6 +359,10 @@ public class GameUI {
         Wall_kitdoorright = LoadTexture("Bilder/Wall/Wall_kitdoorright.png");
         Wall_kitdoortop = LoadTexture("Bilder/Wall/Wall_kitdoortop.png");
         Wall_windowtop = LoadTexture("Bilder/Wall/Wall_windowtop.png");
+        Wall_doormiddle = LoadTexture("Bilder/Wall/Wall_doormiddle.png");
+        Wall_doortop = LoadTexture("Bilder/Wall/Wall_doortop.png");
+        Wall_entrance = LoadTexture("Bilder/Wall/Wall_entrance.png");
+        Wall_entrancetop = LoadTexture("Bilder/Wall/Wall_entrancetop.png");
 
         //preload cash register
         Cashregister_bottomleft = LoadTexture("Bilder/Furniture/Cashregister_bottomleft.png");
@@ -366,6 +387,7 @@ public class GameUI {
         Floor_dirty1 = LoadTexture("Bilder/Floor/Floor_dirty1.png");
         Floor_dirty2 = LoadTexture("Bilder/Floor/Floor_dirty2.png");
         Floor_doorkitbottom = LoadTexture("Bilder/Floor/Floor_doorkitbottom.png");
+        Floor_door = LoadTexture("Bilder/Floor/Floor_door.png");
 
 
         //initialize mouse vector
