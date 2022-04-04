@@ -8,7 +8,7 @@ public class GameUI {
 
     private Vector2 dudePos, dudeBody;
     private String dudeAngle;
-    Texture2D player, pizza;
+    private Texture2D player, pizza, Wall, Wall_doorentrance, Wall_edge, Wall_edgekitdoorleft, Wall_edgekitdoorright, Wall_windowbottom, Wall_kitdoorleft, Wall_kitdoorright, Wall_kitdoortop, Wall_windowtop, Floor, Floor_dirty1, Floor_dirty2, Floor_doorkitbottom;
     float screenHeight, screenWidth;
 
     private void draw(float dudePosX, float dudePosY)
@@ -82,28 +82,32 @@ public class GameUI {
     private void movePizzas(ArrayList<pizza> pizzaArray)
     {
         for (pizza p:  pizzaArray){
-            /*
-            //static horizontal and vertical movement
-            switch (p.getDirection())
-            {
-                case "up": p.getWorldPos().y(p.getWorldPos().y() - 2.0f);
-                    break;
-                case "down": p.getWorldPos().y(p.getWorldPos().y() + 2.0f);
-                    break;
-                case "left": p.getWorldPos().x(p.getWorldPos().x() + 2.0f);
-                    break;
-                case "right": p.getWorldPos().x(p.getWorldPos().x() - 2.0f);
-                    break;
-            }
-            */
             moveAlongVector(p);
+        }
+    }
+
+    private void moveCustomerAlong(customer p)
+    {
+
+    }
+
+
+    private void moveCustomer(ArrayList<customer> customerArrayList,AI controller)
+    {
+        for(customer p : customerArrayList)
+        {
+            //if customer is not dead
+            if(p.customer_state != 3) {
+                //manipulate walking direction controlled by AI class
+                controller.customer_ai_tick(p);
+            }
         }
     }
 
     private void drawPizzas(ArrayList<pizza>  pizzaArray)
     {
         for (pizza p:  pizzaArray){
-            DrawText("A:"+p.getAngle(),Math.round(p.getWorldPos().x()),Math.round(p.getWorldPos().y())-40,20,BLACK);
+            //DrawText("A:"+p.getAngle(),Math.round(p.getWorldPos().x()),Math.round(p.getWorldPos().y())-40,20,BLACK);
             //DrawCircleV(p.getWorldPos(), p.getSize(), RED);
             DrawTextureV(pizza, p.getWorldPos(), WHITE);
         }
@@ -112,27 +116,54 @@ public class GameUI {
     private void drawCustomer(ArrayList<customer> customerArrayList)
     {
         //get instance of all arraylists
-        ArrayListCollection use = ArrayListCollection.getInstance();
         for(customer p: customerArrayList)
         {
-            DrawRectangle(Math.round(p.worldPos.x()),Math.round(p.worldPos.y()),p.width,p.height,BROWN);
+            if(p.customer_state != 3) {
+                DrawRectangleV(p.getWorldPos(), new Vector2(p.height, p.width), BROWN);
+                //DrawTextureV(pizza, p.getWorldPos(), WHITE);
+            }
         }
     }
 
+    private void drawMap(ArrayList<Tiles> TilesArrayList) {
+        for(Tiles t: TilesArrayList)
+        {
+            DrawTextureV(t.getTexture(), t.getWorldPos(), WHITE);
+        }
+    }
+
+
     private void CreateWindow()
     {
-        InitWindow(800, 600, "Demo");
+        InitWindow(640, 480, "Demo");
         SetTargetFPS(60);
         //ToggleFullscreen();
     }
 
     private void DrawEverything() {
-        DrawText(dudeAngle, 50, 100, 100, GREEN);
-        DrawText("Angle:"+calcAngle(dudePos),20,300,300,ORANGE);
+        BeginDrawing();
+
+        //DrawText(dudeAngle, 50, 100, 100, GREEN);
+        //DrawText("Angle:"+calcAngle(dudePos),20,300,300,ORANGE);
 
         ArrayListCollection use = ArrayListCollection.getInstance();
         AI jerrybrain = AI.getInstance();
 
+        //check collisions before moving objects
+        //initialize collision manager obj
+        collision_manager collision = new collision_manager();
+
+        //check all coliders
+        if(collision.getCollision() != null)
+        {
+            System.out.println(collision.getCollision().name+"/");
+        }
+        else
+        {
+            //System.out.println("nothing hit");
+        }
+
+        drawMap(use.getTilesList());
 
         //first move all pizzas
         movePizzas(use.getPizzaList());
@@ -140,11 +171,12 @@ public class GameUI {
         //then draw all pizzas
         drawPizzas(use.getPizzaList());
 
-        jerrybrain.ai_tick_random();
+        //pass customer list and AI controller obj into move customer method
+        moveCustomer(use.getCustomerList(),jerrybrain);
         //draw all customers currently spawned
         drawCustomer(use.getCustomerList());
 
-        BeginDrawing();
+
         //getAngle();
         //draw call with position of the main dude
         draw(dudePos.x(), dudePos.y());
@@ -155,6 +187,28 @@ public class GameUI {
 
         //Ends the Drawing
         EndDrawing();
+    }
+
+    private void FillTileArray() {
+        ArrayListCollection use = ArrayListCollection.getInstance();
+        Texture2D texture = Wall;
+
+        for (float i = 0; i < 480; i=i+32) {
+            for (float j = 0; j < 640; j=j+32) {
+                Tiles tile = new Tiles(texture, j, i);
+                use.addTile(tile);
+            }
+
+            if (i == 32) {
+                texture = Wall_edge;
+            }
+
+            if (i == 64) {
+                texture = Floor;
+            }
+        }
+
+
     }
 
     public GameUI() {
@@ -183,29 +237,44 @@ public class GameUI {
         // preload for behind back left right
         Texture2D front = LoadTexture("Bilder/Charakter/Charakter.png");
         Texture2D behind = LoadTexture("Bilder/Charakter/Charakter_behind.png");
+        Texture2D left = LoadTexture("Bilder/Charakter/Charakter_left.png");
+        Texture2D right = LoadTexture("Bilder/Charakter/Charakter_right.png");
+
+        // preload for wall
+        Wall = LoadTexture("Bilder/Wall/Wall.png");
+        Wall_doorentrance = LoadTexture("Bilder/Wall/Wall_doorentrance.png");
+        Wall_edge = LoadTexture("Bilder/Wall/Wall_edge.png");
+        Wall_edgekitdoorleft = LoadTexture("Bilder/Wall/Wall_edgekitdoorleft.png");
+        Wall_edgekitdoorright = LoadTexture("Bilder/Wall/Wall_edgekitdoorright.png");
+        Wall_windowbottom = LoadTexture("Bilder/Wall/Wall_windowbottom.png");
+        Wall_kitdoorleft = LoadTexture("Bilder/Wall/Wall_kitdoorleft.png");
+        Wall_kitdoorright = LoadTexture("Bilder/Wall/Wall_kitdoorright.png");
+        Wall_kitdoortop = LoadTexture("Bilder/Wall/Wall_kitdoortop.png");
+        Wall_windowtop = LoadTexture("Bilder/Wall/Wall_windowtop.png");
+
+        // preload for floor
+        Floor = LoadTexture("Bilder/Floor/Floor.png");
+        Floor_dirty1 = LoadTexture("Bilder/Floor/Floor_dirty1.png");
+        Floor_dirty2 = LoadTexture("Bilder/Floor/Floor_dirty2.png");
+        Floor_doorkitbottom = LoadTexture("Bilder/Floor/Floor_doorkitbottom.png");
+
 
         //initialize mouse vector
         Vector2 mousePos = new Vector2(GetMouseX(),GetMouseY());
 
 
-
-
         // Instanz vom Singleton
         ArrayListCollection use = ArrayListCollection.getInstance();
 
-        //initilize test customer
-        /*
-        for (int step = 0; step < 1; step++) {
-            customer jerry = new customer(jerryPos,1,32,32);
-            use.addCustomer(jerry);
-        }
-        */
-        customer jerry = new customer(jerryPos,1,32,32);
+
+
+        customer jerry = new customer(30, 30,300,300, 1,32,32,300);
         use.addCustomer(jerry);
 
-        customer berry = new customer(jerryPos,1,32,32);
-        use.addCustomer(berry);
 
+
+
+        FillTileArray();
 
 
 
@@ -225,11 +294,13 @@ public class GameUI {
 
             if (IsKeyDown(KEY_D)) {
                 dudeAngle = "left";
+                player = right;
                 dudePos.x(Posx + 2f);
             }
             if (IsKeyDown(KEY_A))
             {
                 dudeAngle = "right";
+                player = left;
                 dudePos.x(Posx - 2.0f);
             }
 
@@ -252,6 +323,11 @@ public class GameUI {
 
                 //pizza pizzaObj = new pizza(50,50, GetMouseX(),GetMouseY());
                 pizza pizzaObj = new pizza(20,50, dudePos.x(),dudePos.y(), calcAngle(dudePos));
+
+
+                //customer berry = new customer(mousePos.x(),mousePos.y(),1,32,32,3,"berry");
+                //use.addCustomer(berry);
+
 
 
                 use.addPizza(pizzaObj);
