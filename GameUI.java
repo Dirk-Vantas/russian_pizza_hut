@@ -10,6 +10,7 @@ public class GameUI {
     private String dudeAngle;
     private Texture2D player, pizza, Wall, Wall_doorentrance, Wall_edge, Wall_edgekitdoorleft, Wall_edgekitdoorright, Wall_windowbottom, Wall_kitdoorleft, Wall_kitdoorright, Wall_kitdoortop, Wall_windowtop, Floor, Floor_dirty1, Floor_dirty2, Floor_doorkitbottom;
     private Texture2D Cashregister_bottomleft,Cashregister_bottommiddle,Cashregister_bottomright,Cashregister_extrabottom,Cashregister_extratop,Cashregister_topleft,Cashregister_topmiddle,Cashregister_topright;
+    private Texture2D Chair_left, Chair_right, Table_begin, Table_middle, Table_end;
     float screenHeight, screenWidth;
     GameController gameObj;
 
@@ -243,7 +244,7 @@ public class GameUI {
         use.replaceTexture(35, Wall_windowbottom);
 
 
-        // furniture
+        // furniture ( chair and tables )
         use.makeTile(54, Cashregister_topleft);
         use.makeTile(55, Cashregister_extratop);
         use.makeTile(56, Cashregister_topmiddle);
@@ -258,7 +259,45 @@ public class GameUI {
         use.makeTile(78, Cashregister_bottommiddle);
         use.makeTile(79, Cashregister_bottomright);
 
-        use.makeTile();
+        use.makeTile(102, Chair_left);
+        use.makeTile(103, Table_end);
+        use.makeTile(104, Chair_right);
+        use.makeTile(123, Table_middle);
+        use.makeTile(142, Chair_left);
+        use.makeTile(143, Table_begin);
+        use.makeTile(144, Chair_right);
+
+        use.makeTile(202, Chair_left);
+        use.makeTile(203, Table_end);
+        use.makeTile(204, Chair_right);
+        use.makeTile(223, Table_middle);
+        use.makeTile(242, Chair_left);
+        use.makeTile(243, Table_begin);
+        use.makeTile(244, Chair_right);
+
+        use.makeTile(209, Chair_left);
+        use.makeTile(210, Table_end);
+        use.makeTile(211, Chair_right);
+        use.makeTile(230, Table_middle);
+        use.makeTile(249, Chair_left);
+        use.makeTile(250, Table_begin);
+        use.makeTile(251, Chair_right);
+
+        use.makeTile(115, Chair_left);
+        use.makeTile(116, Table_end);
+        use.makeTile(117, Chair_right);
+        use.makeTile(136, Table_middle);
+        use.makeTile(155, Chair_left);
+        use.makeTile(156, Table_begin);
+        use.makeTile(157, Chair_right);
+
+        use.makeTile(215, Chair_left);
+        use.makeTile(216, Table_end);
+        use.makeTile(217, Chair_right);
+        use.makeTile(236, Table_middle);
+        use.makeTile(255, Chair_left);
+        use.makeTile(256, Table_begin);
+        use.makeTile(257, Chair_right);
 
 
     }
@@ -313,6 +352,14 @@ public class GameUI {
         Cashregister_topleft = LoadTexture("Bilder/Furniture/Cashregister_topleft.png");
         Cashregister_topmiddle = LoadTexture("Bilder/Furniture/Cashregister_topmiddle.png");
         Cashregister_topright = LoadTexture("Bilder/Furniture/Cashregister_topright.png");
+
+        //preload Chairs and Table
+
+        Chair_left = LoadTexture("Bilder/Furniture/Chair_left.png");
+        Chair_right = LoadTexture("Bilder/Furniture/Chair_right.png");
+        Table_begin= LoadTexture("Bilder/Furniture/Table_begin.png");
+        Table_middle = LoadTexture("Bilder/Furniture/Table_middle.png");
+        Table_end = LoadTexture("Bilder/Furniture/Table_end.png");
 
         // preload for floor
         Floor = LoadTexture("Bilder/Floor/Floor.png");
