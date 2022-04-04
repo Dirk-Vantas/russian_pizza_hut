@@ -21,6 +21,9 @@ public class ArrayListCollection {
     private ArrayList<pizza> pizzaArray;
     private ArrayList<customer> customerArray;
     private ArrayList<Tiles> TileArray;
+    private ArrayList<furniture_chair> chairArrayList;
+    private ArrayList<furniture_table> tableArrayList;
+    private ArrayList<furniture_cashRegister> cashRegisterArrayList;
 
 
     public ArrayListCollection() {
@@ -28,29 +31,34 @@ public class ArrayListCollection {
         pizzaArray = new ArrayList<pizza>();
         customerArray = new ArrayList<customer>();
         TileArray = new ArrayList<Tiles>();
+        chairArrayList = new ArrayList<furniture_chair>();
+        cashRegisterArrayList = new ArrayList<furniture_cashRegister>();
+        tableArrayList = new ArrayList<furniture_table>();
 
     }
+    //cash register array
+    public void addCashRegister(furniture_cashRegister p) {cashRegisterArrayList.add(p);}
+    public ArrayList<furniture_cashRegister> getCashRegisterArrayList() {return this.cashRegisterArrayList;}
 
-    public void addPizza(pizza p) {
-        pizzaArray.add(p);
-    }
-    public ArrayList<pizza> getPizzaList() {
-        return this.pizzaArray;
-    }
+    //table  array
+    public void addTable(furniture_table p) {tableArrayList.add(p);}
+    public ArrayList<furniture_table> getTableArrayList() {return this.tableArrayList;}
 
-    //create array of customers to be rendered and moved
+    //pizza array
+    public void addPizza(pizza p) {pizzaArray.add(p);}
+    public ArrayList<pizza> getPizzaList() {return this.pizzaArray;}
 
-    public void addCustomer(customer p) {
-        customerArray.add(p);
-    }
-    public ArrayList<customer> getCustomerList() {
-        return this.customerArray;
-    }
+    //chair array
+    public void addChair(furniture_chair p) {chairArrayList.add(p);}
+    public ArrayList<furniture_chair> getChairArrayList() {return this.chairArrayList;}
 
+    //customer array
+    public void addCustomer(customer p) {customerArray.add(p);}
+    public ArrayList<customer> getCustomerList() {return this.customerArray;}
+
+    //tiles array BACKGROUND
     public  void addTile(Tiles t) { TileArray.add(t); }
-    public ArrayList<Tiles> getTilesList() {
-        return this.TileArray;
-    }
+    public ArrayList<Tiles> getTilesList() {return this.TileArray;}
 
     public void replaceTexture(int index, Raylib.Texture2D path) {
         Tiles tile = TileArray.get(index);
