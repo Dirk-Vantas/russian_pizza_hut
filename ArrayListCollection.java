@@ -1,6 +1,8 @@
+import com.raylib.Jaylib;
 import com.raylib.Raylib;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 public class ArrayListCollection {
 
