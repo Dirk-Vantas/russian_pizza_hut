@@ -236,7 +236,7 @@ public class GameUI {
 
 
         // furniture
-        use.makeTile(54, );
+        //use.makeTile(54, );
 
     }
 
