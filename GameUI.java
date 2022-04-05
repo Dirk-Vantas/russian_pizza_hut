@@ -111,9 +111,11 @@ public class GameUI {
     private void drawPizzas(ArrayList<pizza>  pizzaArray)
     {
         for (pizza p:  pizzaArray){
-            //DrawText("A:"+p.getAngle(),Math.round(p.getWorldPos().x()),Math.round(p.getWorldPos().y())-40,20,BLACK);
-            //DrawCircleV(p.getWorldPos(), p.getSize(), RED);
-            DrawTextureV(pizza, p.getWorldPos(), WHITE);
+            if(p.getVisibility() == true) {
+                //DrawText("A:"+p.getAngle(),Math.round(p.getWorldPos().x()),Math.round(p.getWorldPos().y())-40,20,BLACK);
+                //DrawCircleV(p.getWorldPos(), p.getSize(), RED);
+                DrawTextureV(pizza, p.getWorldPos(), WHITE);
+            }
         }
     }
 
@@ -166,9 +168,10 @@ public class GameUI {
         collision_manager collision = new collision_manager();
 
         //check all coliders
+
         if(collision.getCollision(gameObj) != null)
         {
-            System.out.println(collision.getCollision(gameObj).name+"/");
+            //System.out.println(collision.getCollision(gameObj).name+"/");
         }
         else
         {

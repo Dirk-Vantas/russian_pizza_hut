@@ -22,28 +22,31 @@ public class collision_manager {
         for(customer customer : use.getCustomerList()) {
             if (customer.customer_state != 3) {
                 for (pizza pie : use.getPizzaList()) {
-                    Rectangle rect = new Rectangle();
-                    rect.height(customer.getHeight());
-                    rect.width(customer.getWidth());
-                    rect.x(customer.getWorldPos().x());
-                    rect.y(customer.getWorldPos().y());
+                    if(pie.getVisibility() == true) {
+                        Rectangle rect = new Rectangle();
+                        rect.height(customer.getHeight());
+                        rect.width(customer.getWidth());
+                        rect.x(customer.getWorldPos().x());
+                        rect.y(customer.getWorldPos().y());
 
-                    if (CheckCollisionCircleRec(pie.getWorldPos(), pie.getSize(), rect) == true) {
-                        hit = customer;
-                        if(customer.customer_state ==1) {
-                            //if customer is sitting down and waiting for an order he will be serverd
-                            customer.serve(new Vector2(30, 30));
-                            game.addPoint();
+                        if (CheckCollisionCircleRec(pie.getWorldPos(), pie.getSize(), rect) == true) {
+                            hit = customer;
+                            //after pizza is hit remove from renderer
+                            pie.setVisibility(false);
+                            if (customer.customer_state == 1) {
+                                //if customer is sitting down and waiting for an order he will be serverd
+                                customer.serve(new Vector2(30, 30));
+                                game.addPoint();
+
+                            } else {
+                                //if customer was hit and no pizza was requested Ie still walking or was already serverd deduct 1 point
+                                game.subtracktPoints();
+                            }
+                            //if collision is found break out of the for loop
+                            break;
+                        } else {
+                            hit = null;
                         }
-                        else
-                        {
-                            //if customer was hit and no pizza was requested Ie still walking or was already serverd deduct 1 point
-                            game.subtracktPoints();
-                        }
-                        //if collision is found break out of the for loop
-                        break;
-                    } else {
-                        hit = null;
                     }
                 }
                 if (hit != null) {

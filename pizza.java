@@ -8,6 +8,7 @@ public class pizza {
     private Vector2 world_pos;
     private float worldspaceX;
     private float worldspaceY;
+    private boolean exists;
 
     private double ttl;
     private double angle;
@@ -19,6 +20,7 @@ public class pizza {
         this.worldspaceY = worldspaceY;
         this.angle = angle;
         this.ttl = 0;
+        this.exists=true;
     }
 
     public Vector2 getWorldPos() {
@@ -44,6 +46,9 @@ public class pizza {
     public double getAngle() {
         return angle;
     }
+
+    public void setVisibility(boolean tag){ this.exists = tag;}
+    public boolean getVisibility(){return this.exists;}
 
 }
 
