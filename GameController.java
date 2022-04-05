@@ -84,10 +84,6 @@ public class GameController {
                 //get random type of npc and add him
                 int nextNPC = rand.nextInt(2);
 
-
-
-
-
                 var sitt_x = chairCheck.getWorldPos().x();
                 var sitt_y = chairCheck.getWorldPos().y();
 
