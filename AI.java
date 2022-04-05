@@ -45,6 +45,7 @@ public class AI {
                 //if customer reached goal sitt him down
                 p.customer_state = 1;
             }
+
             //else increase his tangents
             else {
                 //increase steps taken so character moves forward
