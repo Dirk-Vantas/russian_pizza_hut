@@ -12,6 +12,7 @@ public class GameUI {
     private Texture2D Cashregister_bottomleft,Cashregister_bottommiddle,Cashregister_bottomright,Cashregister_extrabottom,Cashregister_extratop,Cashregister_topleft,Cashregister_topmiddle,Cashregister_topright;
     private Texture2D Chair_left, Chair_right, Table_begin, Table_middle, Table_end;
     private Texture2D Floor_door, Wall_doormiddle, Wall_doortop, Wall_entrance, Wall_entrancetop;
+    private Texture2D Fatman, Fatman_behind, Fatman_left, Fatman_right, Karen, Karen_behind, Karen_left, Karen_right, Normalman, Normalman_behind, Normalman_left, Normalman_right;
     float screenHeight, screenWidth;
     GameController gameObj;
 
