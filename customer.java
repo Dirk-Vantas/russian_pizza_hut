@@ -10,6 +10,8 @@ public class customer implements Icollision_object{
     Vector2 worldPos;
     Rectangle collision_body;
 
+    private Raylib.Texture2D texture;
+
     float speed;
     float width;
     float height;
@@ -116,4 +118,11 @@ public class customer implements Icollision_object{
     }
 
 
+    public Raylib.Texture2D getTexture2D() {
+        return this.texture;
+    }
+
+    public void setTexture2D(Raylib.Texture2D texture2D) {
+        this.texture = texture2D;
+    }
 }

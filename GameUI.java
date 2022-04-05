@@ -49,7 +49,7 @@ public class GameUI {
         double Angle = Math.atan2(y-mouseY,x-mouseX) * 180 / Math.PI;
         if(Angle < 0)
         {
-            //if angle lower than 0 add 360 to fix for full circle solution
+            //if angle lower than 0 add 360 to fix for full circle soGaalution
             Angle = Angle + 360;
         }
         //double degrees = (Angle + 360) % 360;
@@ -126,7 +126,11 @@ public class GameUI {
         for(customer p: customerArrayList)
         {
             if(p.customer_state != 3) {
-                DrawRectangleV(p.getWorldPos(), new Vector2(p.height, p.width), BROWN);
+
+                if (p.customer_state == 2) {
+                    p.setTexture2D();
+                }
+                DrawTextureV(p.getTexture2D(), new Vector2(p.height, p.width), WHITE);
                 //DrawTextureV(pizza, p.getWorldPos(), WHITE);
             }
         }
@@ -149,7 +153,7 @@ public class GameUI {
     {
         InitWindow(640, 480, "Demo");
         SetTargetFPS(60);
-        ToggleFullscreen();
+        //ToggleFullscreen();
     }
 
     private void DrawEverything() {
@@ -186,6 +190,8 @@ public class GameUI {
 
         //then draw all pizzas
         drawPizzas(use.getPizzaList());
+
+        gameObj.spawnNPC();
 
         //pass customer list and AI controller obj into move customer method
         moveCustomer(use.getCustomerList(),jerrybrain);
@@ -405,6 +411,23 @@ public class GameUI {
         Floor_doorkitbottom = LoadTexture("Bilder/Floor/Floor_doorkitbottom.png");
         Floor_door = LoadTexture("Bilder/Floor/Floor_door.png");
 
+        // preload npcs
+        Fatman = LoadTexture("Bilder/NPCS/Fatman.png");
+        Fatman_behind = LoadTexture("Bilder/NPCS/Fatman_behind.png");
+        Fatman_right = LoadTexture("Bilder/NPCS/Fatman_right.png");
+        Fatman_left = LoadTexture("Bilder/NPCS/Fatman_left.png");
+
+        Karen = LoadTexture("Bilder/NPCS/Karen.png");
+        Karen_behind = LoadTexture("Bilder/NPCS/Karen_behind.png");
+        Karen_left = LoadTexture("Bilder/NPCS/Karen_left.png");
+        Karen_right = LoadTexture("Bilder/NPCS/Karen_right.png");
+
+        Normalman = LoadTexture("Bilder/NPCS/Normalman.png");
+        Normalman_behind = LoadTexture("Bilder/NPCS/Normalman_behind.png");
+        Normalman_left = LoadTexture("Bilder/NPCS/Normalman_left.png");
+        Normalman_right = LoadTexture("Bilder/NPCS/Normalman_right.png");
+
+
 
         //initialize mouse vector
         Vector2 mousePos = new Vector2(GetMouseX(),GetMouseY());
@@ -415,18 +438,7 @@ public class GameUI {
 
         gameObj = new GameController(20);
 
-        customer jerry = new customer(30, 30,300,300, 1,32,32,300);
-        use.addCustomer(jerry);
-
-        customer brenda = new karen(30, 30,300,300, 1,32,32,300);
-        use.addCustomer(brenda);
-
-
-
-
         FillTileArray();
-
-
 
 
         System.out.println("Text is: "+GetMousePosition());
