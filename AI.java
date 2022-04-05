@@ -8,13 +8,24 @@ import static com.raylib.Jaylib.ORANGE;
 import static com.raylib.Raylib.*;
 
 
+/**
+ * The type Ai.
+ */
 public class AI {
 
+    /**
+     * The Max count.
+     */
     int max_count;
 
     // Singleton Session Pattern begin
     private static AI single_instance = null;
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static AI getInstance() {
         if (single_instance == null) {
             single_instance = new AI();
@@ -23,11 +34,19 @@ public class AI {
     }
     // Singleton Session Pattern end
 
-    //this class will be used as an AI controller
+    /**
+     * Instantiates a new Ai.
+     */
+//this class will be used as an AI controller
     public AI() {
 
     }
 
+    /**
+     * Customer ai tick.
+     *
+     * @param p the p
+     */
     public void customer_ai_tick(customer p)
     {
         /*

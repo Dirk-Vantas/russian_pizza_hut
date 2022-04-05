@@ -4,16 +4,35 @@ import java.util.Random;
 
 import static com.raylib.Raylib.LoadTexture;
 
+/**
+ * The type Game controller.
+ */
 public class GameController {
 
+    /**
+     * The Round points.
+     */
     int round_points;
+    /**
+     * The Max npc count.
+     */
     int max_npc_count;
+    /**
+     * The Spawner cooldown.
+     */
     double spawner_cooldown;
+    /**
+     * The Max spawn cooldown.
+     */
     double max_spawn_cooldown;
     private Raylib.Texture2D Fatman, Fatman_behind, Fatman_left, Fatman_right, Karen, Karen_behind, Karen_left, Karen_right, Normalman, Normalman_behind, Normalman_left, Normalman_right;
 
 
-
+    /**
+     * Instantiates a new Game controller.
+     *
+     * @param max_npc_count the max npc count
+     */
     public GameController(int max_npc_count)
     {
         // preload npcs
@@ -37,16 +56,27 @@ public class GameController {
         this.max_spawn_cooldown = 10;
     }
 
+    /**
+     * Add point.
+     */
     public void addPoint()
     {
         this.round_points++;
     }
 
+    /**
+     * Subtrackt points.
+     */
     public void subtracktPoints()
     {
         this.round_points--;
     }
 
+    /**
+     * Manage chairs tiles.
+     *
+     * @return the tiles
+     */
     public Tiles manageChairs()
     {
         ArrayListCollection use = ArrayListCollection.getInstance();
@@ -72,6 +102,9 @@ public class GameController {
     }
 
 
+    /**
+     * Spawn npc.
+     */
     public void spawnNPC() {
 
         var chairCheck = manageChairs();

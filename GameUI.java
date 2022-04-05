@@ -4,6 +4,9 @@ import static com.raylib.Jaylib.*;
 import static com.raylib.Raylib.CloseWindow;
 import static com.raylib.Raylib.EndDrawing;
 
+/**
+ * The type Game ui.
+ */
 public class GameUI {
 
     private Vector2 dudePos, dudeBody;
@@ -13,7 +16,16 @@ public class GameUI {
     private Texture2D Chair_left, Chair_right, Table_begin, Table_middle, Table_end;
     private Texture2D Floor_door, Wall_doormiddle, Wall_doortop, Wall_entrance, Wall_entrancetop;
     private Texture2D Fatman, Fatman_behind, Fatman_left, Fatman_right, Karen, Karen_behind, Karen_left, Karen_right, Normalman, Normalman_behind, Normalman_left, Normalman_right;
-    float screenHeight, screenWidth;
+    /**
+     * The Screen height.
+     */
+    float screenHeight, /**
+     * The Screen width.
+     */
+    screenWidth;
+    /**
+     * The Game obj.
+     */
     GameController gameObj;
 
     private void draw(float dudePosX, float dudePosY)
@@ -352,6 +364,9 @@ public class GameUI {
 
     }
 
+    /**
+     * Instantiates a new Game ui.
+     */
     public GameUI() {
 
         // Main setup for Window

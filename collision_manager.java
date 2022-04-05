@@ -8,9 +8,18 @@ import static com.raylib.Raylib.CloseWindow;
 import static com.raylib.Raylib.EndDrawing;
 
 
+/**
+ * The type Collision manager.
+ */
 public class collision_manager {
     //this class will manage all collission detection logic
 
+    /**
+     * Gets collision.
+     *
+     * @param game the game
+     * @return the collision
+     */
     public customer getCollision(GameController game)
     {
         // Instanz vom Singleton

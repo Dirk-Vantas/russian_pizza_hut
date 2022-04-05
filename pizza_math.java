@@ -1,9 +1,19 @@
 import com.raylib.Jaylib;
 
 
+/**
+ * The type Pizza math.
+ */
 public class pizza_math {
 
-    //calculates polar vector angle from start and end point
+    /**
+     * Calc angle double.
+     *
+     * @param start_point the start point
+     * @param end_point   the end point
+     * @return the double
+     */
+//calculates polar vector angle from start and end point
     public static double calcAngle(Jaylib.Vector2 start_point, Jaylib.Vector2 end_point)
     {
         //calculate in what angle player is looking
@@ -17,21 +27,49 @@ public class pizza_math {
         return Angle;
     }
 
+    /**
+     * Gets x.
+     *
+     * @param length_R the length r
+     * @param Angle    the angle
+     * @return the x
+     */
     public static double getX(double length_R, double Angle)
     {
         return length_R * Math.cos(Math.toRadians(Angle));
     }
 
+    /**
+     * Gets y.
+     *
+     * @param length_R the length r
+     * @param Angle    the angle
+     * @return the y
+     */
     public static double getY(double length_R, double Angle)
     {
         return length_R * Math.sin(Math.toRadians(Angle));
     }
 
+    /**
+     * Gets vec magnitude.
+     *
+     * @param x the x
+     * @param y the y
+     * @return the vec magnitude
+     */
     public static double getVecMagnitude(double x,double y)
     {
         return Math.sqrt((Math.pow(x,2))+(Math.pow(y,2)));
     }
 
+    /**
+     * Gets vec distance.
+     *
+     * @param startpoint the startpoint
+     * @param endpoint   the endpoint
+     * @return the vec distance
+     */
     public static double getVecDistance(Jaylib.Vector2 startpoint, Jaylib.Vector2 endpoint)
     {
         //get vector difference
