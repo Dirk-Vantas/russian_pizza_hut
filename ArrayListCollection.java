@@ -20,7 +20,7 @@ public class ArrayListCollection {
     //create array of pizzas to be shot and drawn
     private ArrayList<pizza> pizzaArray;
     private ArrayList<customer> customerArray;
-    private ArrayList<Tiles> TileArray, FurnitureArray;
+    private ArrayList<Tiles> TileArray, FurnitureArray,chairArray;
 
     public ArrayListCollection() {
         // Instance
@@ -28,9 +28,16 @@ public class ArrayListCollection {
         customerArray = new ArrayList<customer>();
         TileArray = new ArrayList<Tiles>();
         FurnitureArray = new ArrayList<Tiles>();
+        chairArray = new ArrayList<Tiles>();
     }
-    //cash register array
+    //chair register array
+    public void addChair(int index){
 
+        //get worldpossition from underlying tile
+        var chair = this.getTilesList().get(index).getWorldPos();
+        //add chair to seperate array
+        chairArray.add(new Tiles(chair.x(),chair.y()));
+    }
     // furniture array
     public void addFurniture(Tiles t) {FurnitureArray.add(t);}
     public ArrayList<Tiles> getFurnitureArray() {return this.FurnitureArray;}
@@ -59,5 +66,7 @@ public class ArrayListCollection {
         tile.setWorld_pos(vector);
         FurnitureArray.add(tile);
     }
+
+
 
 }

@@ -281,26 +281,38 @@ public class GameUI {
         use.makeTile(79, Cashregister_bottomright);
 
         use.makeTile(102, Chair_left);
+        use.addChair(102);
         use.makeTile(103, Table_end);
         use.makeTile(104, Chair_right);
+        use.addChair(104);
         use.makeTile(123, Table_middle);
+
         use.makeTile(142, Chair_left);
+        use.addChair(142);
         use.makeTile(143, Table_begin);
         use.makeTile(144, Chair_right);
+        use.addChair(144);
 
         use.makeTile(202, Chair_left);
+        use.addChair(202);
         use.makeTile(203, Table_end);
         use.makeTile(204, Chair_right);
+        use.addChair(204);
         use.makeTile(223, Table_middle);
         use.makeTile(242, Chair_left);
+        use.addChair(242);
         use.makeTile(243, Table_begin);
         use.makeTile(244, Chair_right);
+        use.addChair(244);
 
         use.makeTile(209, Chair_left);
+        use.addChair(209);
         use.makeTile(210, Table_end);
         use.makeTile(211, Chair_right);
+        use.addChair(211);
         use.makeTile(230, Table_middle);
         use.makeTile(249, Chair_left);
+        
         use.makeTile(250, Table_begin);
         use.makeTile(251, Chair_right);
 
