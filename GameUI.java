@@ -128,9 +128,9 @@ public class GameUI {
             if(p.customer_state != 3) {
 
                 if (p.customer_state == 2) {
-                    p.setTexture2D();
+                    //p.setTexture2D();
                 }
-                DrawTextureV(p.getTexture2D(), new Vector2(p.height, p.width), WHITE);
+                DrawTextureV(p.getTexture2D(), new Vector2(p.worldPos.x(),p.worldPos.y()), WHITE);
                 //DrawTextureV(pizza, p.getWorldPos(), WHITE);
             }
         }
@@ -318,25 +318,34 @@ public class GameUI {
         use.addChair(211);
         use.makeTile(230, Table_middle);
         use.makeTile(249, Chair_left);
-        
+        use.addChair(249);
         use.makeTile(250, Table_begin);
         use.makeTile(251, Chair_right);
+        use.addChair(251);
 
         use.makeTile(115, Chair_left);
+        use.addChair(115);
         use.makeTile(116, Table_end);
         use.makeTile(117, Chair_right);
+        use.addChair(117);
         use.makeTile(136, Table_middle);
         use.makeTile(155, Chair_left);
+        use.addChair(155);
         use.makeTile(156, Table_begin);
         use.makeTile(157, Chair_right);
+        use.addChair(157);
 
         use.makeTile(215, Chair_left);
+        use.addChair(215);
         use.makeTile(216, Table_end);
         use.makeTile(217, Chair_right);
+        use.addChair(217);
         use.makeTile(236, Table_middle);
         use.makeTile(255, Chair_left);
+        use.addChair(255);
         use.makeTile(256, Table_begin);
         use.makeTile(257, Chair_right);
+        use.addChair(257);
 
 
     }

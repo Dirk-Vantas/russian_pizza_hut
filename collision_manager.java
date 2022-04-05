@@ -35,7 +35,8 @@ public class collision_manager {
                             pie.setVisibility(false);
                             if (customer.customer_state == 1) {
                                 //if customer is sitting down and waiting for an order he will be serverd
-                                customer.serve(new Vector2(30, 30));
+                                //get worldpos from doortile
+                                customer.serve(use.getTilesList().get(30).getWorldPos());
                                 game.addPoint();
 
                             } else {

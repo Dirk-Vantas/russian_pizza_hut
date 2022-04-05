@@ -7,6 +7,7 @@ public class Tiles {
     private Raylib.Texture2D texture;
     private Jaylib.Vector2 world_pos;
     private boolean isOccupied;
+    customer occupiedby;
 
     public Tiles(Raylib.Texture2D texture, float worldspaceX, float worldspaceY) {
         this.texture = texture;
@@ -43,4 +44,6 @@ public class Tiles {
     public void setOccupied(boolean set){this.isOccupied = set;}
 
     public boolean getOccupied(){return this.isOccupied;}
+
+    public void setOccupant(customer o){this.occupiedby = o;}
 }

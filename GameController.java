@@ -34,7 +34,7 @@ public class GameController {
 
         this.max_npc_count = max_npc_count;
         this.spawner_cooldown = 10;
-        this.max_spawn_cooldown = 400;
+        this.max_spawn_cooldown = 10;
     }
 
     public void addPoint()
@@ -47,42 +47,85 @@ public class GameController {
         this.round_points--;
     }
 
-    public void spawnNPC()
+    public Tiles manageChairs()
     {
-        if(this.spawner_cooldown < 0)
+        ArrayListCollection use = ArrayListCollection.getInstance();
+
+        Tiles Chair = null;
+
+        for(Tiles c : use.getChair())
         {
-
-            // Instanz vom Singleton
-            ArrayListCollection use = ArrayListCollection.getInstance();
-            Random rand = new Random();
-            //get random type of npc and add him
-            int nextNPC = rand.nextInt(1);
-
-            switch (nextNPC) {
-                case 0:
-                    karen karen = new karen(30, 30, 300, 300, 1, 32, 32, 300);
-                    karen.setTexture2D(this.Karen);
-                    use.addCustomer(karen);
-
-                    //reset cooldown
-                    this.spawner_cooldown = this.max_spawn_cooldown;
-                    break;
-                case 1:
-                    fat_man fatman = new fat_man(30, 30, 300, 300, 1, 32, 32, 300);
-                    fatman.setTexture2D(this.Fatman);
-                    use.addCustomer(fatman);
-                    //reset cooldown
-
-                    this.spawner_cooldown = this.max_spawn_cooldown;
-                    break;
+            if(c.getOccupied() == false)
+            {
+                //chair is empty and can be used return
+                Chair = c;
+                break;
+            }
+            else
+            {
+                Chair = null;
             }
 
-
         }
-        else
-        {
-            //if spawner cooldown is active reduce it further
-            this.spawner_cooldown--;
+
+        return Chair;
+    }
+
+
+    public void spawnNPC() {
+
+        var chairCheck = manageChairs();
+        if (chairCheck != null) {
+            if (this.spawner_cooldown < 0) {
+
+                // Instanz vom Singleton
+                ArrayListCollection use = ArrayListCollection.getInstance();
+                Random rand = new Random();
+                //get random type of npc and add him
+                int nextNPC = rand.nextInt(2);
+
+
+
+
+
+                var sitt_x = chairCheck.getWorldPos().x();
+                var sitt_y = chairCheck.getWorldPos().y();
+
+                switch (nextNPC) {
+                    case 0:
+                        customer karen = new karen(180, 45, sitt_x, sitt_y, 1, 32, 32, 300);
+                        karen.setTexture2D(this.Karen);
+                        use.addCustomer(karen);
+
+                        //set the chair as true
+                        chairCheck.setOccupied(true);
+
+                        //reset cooldown
+                        this.spawner_cooldown = this.max_spawn_cooldown;
+                        break;
+                    case 1:
+                        customer fatman = new fat_man(180, 45, sitt_x, sitt_y, 1, 32, 32, 300);
+                        fatman.setTexture2D(this.Fatman);
+                        use.addCustomer(fatman);
+                        //reset cooldown
+                        chairCheck.setOccupied(true);
+                        this.spawner_cooldown = this.max_spawn_cooldown;
+                        break;
+                    case 2:
+                        customer normal_man = new customer(30, 30, 300, 300, 1, 32, 32, 300);
+                        normal_man.setTexture2D(this.Fatman);
+                        use.addCustomer(normal_man);
+                        //reset cooldown
+                        chairCheck.setOccupied(true);
+                        this.spawner_cooldown = this.max_spawn_cooldown;
+                        break;
+                }
+
+
+            } else {
+                //if spawner cooldown is active reduce it further
+                this.spawner_cooldown--;
+            }
         }
     }
 }

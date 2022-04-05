@@ -38,6 +38,11 @@ public class ArrayListCollection {
         //add chair to seperate array
         chairArray.add(new Tiles(chair.x(),chair.y()));
     }
+
+    public ArrayList<Tiles> getChair()
+    {
+        return this.chairArray;
+    }
     // furniture array
     public void addFurniture(Tiles t) {FurnitureArray.add(t);}
     public ArrayList<Tiles> getFurnitureArray() {return this.FurnitureArray;}

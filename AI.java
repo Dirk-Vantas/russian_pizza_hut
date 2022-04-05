@@ -40,7 +40,7 @@ public class AI {
         //if customer is walking into restaurant
         if(p.customer_state == 0)
         {
-            if(pizza_math.getVecDistance(p.worldPos,p.goal)<1)
+            if(pizza_math.getVecDistance(p.worldPos,p.goal)<5)
             {
                 //if customer reached goal sitt him down
                 p.customer_state = 1;
@@ -73,11 +73,13 @@ public class AI {
             boolean angery = p.isAngery();
             if(angery)
             {
+                ArrayListCollection use = ArrayListCollection.getInstance();
                 //temporary door location is at 30x 30y
-                p.angery_leave(new Jaylib.Vector2(30,30));
+                p.angery_leave(use.getTilesList().get(30).getWorldPos());
                 //change customer state to leaving 2
                 //and erase his last steps taken
                 p.customer_state = 2;
+
                 p.steps_last_taken = 0;
             }
         }
@@ -97,7 +99,7 @@ public class AI {
                 float yF = (float) y;
                 float xF = (float) x;
 
-            if(pizza_math.getVecDistance(p.worldPos,p.goal)<1)
+            if(pizza_math.getVecDistance(p.worldPos,p.goal)<5)
             {
                 //if customer is back at door despawn
                 p.customer_state =3;
