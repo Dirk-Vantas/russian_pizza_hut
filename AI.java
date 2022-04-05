@@ -30,12 +30,14 @@ public class AI {
 
     public void customer_ai_tick(customer p)
     {
-
+        /*
         DrawText("cstm state:"+p.customer_state ,Math.round(p.worldPos.x()),Math.round(p.worldPos.y())-30,20,ORANGE);
         DrawText("cstm steps taken:"+p.steps_last_taken ,Math.round(p.worldPos.x()),Math.round(p.worldPos.y())-40,20,ORANGE);
         DrawText("cstm way to go"+p.distance_to_cover ,Math.round(p.worldPos.x()),Math.round(p.worldPos.y())-50,20,ORANGE);
         DrawText("distance"+pizza_math.getVecDistance(p.worldPos,p.goal) ,300,300,20,ORANGE);
         System.out.println(pizza_math.getVecDistance(p.worldPos,p.goal));
+
+         */
 
         //if customer is walking into restaurant
         if(p.customer_state == 0)
@@ -79,6 +81,7 @@ public class AI {
                 //change customer state to leaving 2
                 //and erase his last steps taken
                 p.customer_state = 2;
+                p.chair.setOccupied(false);
 
                 p.steps_last_taken = 0;
             }

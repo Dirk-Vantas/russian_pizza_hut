@@ -23,6 +23,7 @@ public class customer implements Icollision_object{
     double distance_to_cover;
     double steps_last_taken;
     int customer_state;
+    Tiles chair;
 
 
     public customer(float x,float y, float sitt_x,float sitt_y,float speed, float width, float height, int angerLimit)
@@ -50,6 +51,8 @@ public class customer implements Icollision_object{
         //if this object gets created spawn it
         spawn();
     }
+    public void setChair(Tiles chair){this.chair = chair;}
+
     public boolean isAngery()
     {
         boolean isangery = Boolean.parseBoolean(null);

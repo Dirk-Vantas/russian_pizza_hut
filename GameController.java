@@ -92,6 +92,7 @@ public class GameController {
                         customer karen = new karen(180, 45, sitt_x, sitt_y, 1, 32, 32, 300);
                         karen.setTexture2D(this.Karen);
                         use.addCustomer(karen);
+                        karen.setChair(chairCheck);
 
                         //set the chair as true
                         chairCheck.setOccupied(true);
@@ -103,6 +104,7 @@ public class GameController {
                         customer fatman = new fat_man(180, 45, sitt_x, sitt_y, 1, 32, 32, 300);
                         fatman.setTexture2D(this.Fatman);
                         use.addCustomer(fatman);
+                        fatman.setChair(chairCheck);
                         //reset cooldown
                         chairCheck.setOccupied(true);
                         this.spawner_cooldown = this.max_spawn_cooldown;

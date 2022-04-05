@@ -208,6 +208,8 @@ public class GameUI {
         DrawTextureV(player, dudePos, WHITE);
 
         DrawFurniture(use.getFurnitureArray());
+        //draw all customers currently spawned
+        drawCustomer(use.getCustomerList());
 
         //draw UI on top
         drawUI();
