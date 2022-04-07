@@ -4,6 +4,9 @@ import static com.raylib.Jaylib.*;
 import static com.raylib.Raylib.CloseWindow;
 import static com.raylib.Raylib.EndDrawing;
 
+/**
+ * The type Game ui.
+ */
 public class GameUI {
 
     private Vector2 dudePos, dudeBody;
@@ -12,7 +15,17 @@ public class GameUI {
     private Texture2D Cashregister_bottomleft,Cashregister_bottommiddle,Cashregister_bottomright,Cashregister_extrabottom,Cashregister_extratop,Cashregister_topleft,Cashregister_topmiddle,Cashregister_topright;
     private Texture2D Chair_left, Chair_right, Table_begin, Table_middle, Table_end;
     private Texture2D Floor_door, Wall_doormiddle, Wall_doortop, Wall_entrance, Wall_entrancetop;
-    float screenHeight, screenWidth;
+    private Texture2D Fatman, Fatman_behind, Fatman_left, Fatman_right, Karen, Karen_behind, Karen_left, Karen_right, Normalman, Normalman_behind, Normalman_left, Normalman_right;
+    /**
+     * The Screen height.
+     */
+    float screenHeight, /**
+     * The Screen width.
+     */
+    screenWidth;
+    /**
+     * The Game obj.
+     */
     GameController gameObj;
 
     private void draw(float dudePosX, float dudePosY)
@@ -48,7 +61,7 @@ public class GameUI {
         double Angle = Math.atan2(y-mouseY,x-mouseX) * 180 / Math.PI;
         if(Angle < 0)
         {
-            //if angle lower than 0 add 360 to fix for full circle solution
+            //if angle lower than 0 add 360 to fix for full circle soGaalution
             Angle = Angle + 360;
         }
         //double degrees = (Angle + 360) % 360;
@@ -111,9 +124,11 @@ public class GameUI {
     private void drawPizzas(ArrayList<pizza>  pizzaArray)
     {
         for (pizza p:  pizzaArray){
-            //DrawText("A:"+p.getAngle(),Math.round(p.getWorldPos().x()),Math.round(p.getWorldPos().y())-40,20,BLACK);
-            //DrawCircleV(p.getWorldPos(), p.getSize(), RED);
-            DrawTextureV(pizza, p.getWorldPos(), WHITE);
+            if(p.getVisibility() == true) {
+                //DrawText("A:"+p.getAngle(),Math.round(p.getWorldPos().x()),Math.round(p.getWorldPos().y())-40,20,BLACK);
+                //DrawCircleV(p.getWorldPos(), p.getSize(), RED);
+                DrawTextureV(pizza, p.getWorldPos(), WHITE);
+            }
         }
     }
 
@@ -123,7 +138,11 @@ public class GameUI {
         for(customer p: customerArrayList)
         {
             if(p.customer_state != 3) {
-                DrawRectangleV(p.getWorldPos(), new Vector2(p.height, p.width), BROWN);
+
+                if (p.customer_state == 2) {
+                    //p.setTexture2D();
+                }
+                DrawTextureV(p.getTexture2D(), new Vector2(p.worldPos.x(),p.worldPos.y()), WHITE);
                 //DrawTextureV(pizza, p.getWorldPos(), WHITE);
             }
         }
@@ -146,7 +165,7 @@ public class GameUI {
     {
         InitWindow(640, 480, "Demo");
         SetTargetFPS(60);
-        ToggleFullscreen();
+        //ToggleFullscreen();
     }
 
     private void DrawEverything() {
@@ -166,9 +185,10 @@ public class GameUI {
         collision_manager collision = new collision_manager();
 
         //check all coliders
+
         if(collision.getCollision(gameObj) != null)
         {
-            System.out.println(collision.getCollision(gameObj).name+"/");
+            //System.out.println(collision.getCollision(gameObj).name+"/");
         }
         else
         {
@@ -182,6 +202,8 @@ public class GameUI {
 
         //then draw all pizzas
         drawPizzas(use.getPizzaList());
+
+        gameObj.spawnNPC();
 
         //pass customer list and AI controller obj into move customer method
         moveCustomer(use.getCustomerList(),jerrybrain);
@@ -198,6 +220,8 @@ public class GameUI {
         DrawTextureV(player, dudePos, WHITE);
 
         DrawFurniture(use.getFurnitureArray());
+        //draw all customers currently spawned
+        drawCustomer(use.getCustomerList());
 
         //draw UI on top
         drawUI();
@@ -277,48 +301,72 @@ public class GameUI {
         use.makeTile(79, Cashregister_bottomright);
 
         use.makeTile(102, Chair_left);
+        use.addChair(102);
         use.makeTile(103, Table_end);
         use.makeTile(104, Chair_right);
+        use.addChair(104);
         use.makeTile(123, Table_middle);
+
         use.makeTile(142, Chair_left);
+        use.addChair(142);
         use.makeTile(143, Table_begin);
         use.makeTile(144, Chair_right);
+        use.addChair(144);
 
         use.makeTile(202, Chair_left);
+        use.addChair(202);
         use.makeTile(203, Table_end);
         use.makeTile(204, Chair_right);
+        use.addChair(204);
         use.makeTile(223, Table_middle);
         use.makeTile(242, Chair_left);
+        use.addChair(242);
         use.makeTile(243, Table_begin);
         use.makeTile(244, Chair_right);
+        use.addChair(244);
 
         use.makeTile(209, Chair_left);
+        use.addChair(209);
         use.makeTile(210, Table_end);
         use.makeTile(211, Chair_right);
+        use.addChair(211);
         use.makeTile(230, Table_middle);
         use.makeTile(249, Chair_left);
+        use.addChair(249);
         use.makeTile(250, Table_begin);
         use.makeTile(251, Chair_right);
+        use.addChair(251);
 
         use.makeTile(115, Chair_left);
+        use.addChair(115);
         use.makeTile(116, Table_end);
         use.makeTile(117, Chair_right);
+        use.addChair(117);
         use.makeTile(136, Table_middle);
         use.makeTile(155, Chair_left);
+        use.addChair(155);
         use.makeTile(156, Table_begin);
         use.makeTile(157, Chair_right);
+        use.addChair(157);
 
         use.makeTile(215, Chair_left);
+        use.addChair(215);
         use.makeTile(216, Table_end);
         use.makeTile(217, Chair_right);
+        use.addChair(217);
         use.makeTile(236, Table_middle);
         use.makeTile(255, Chair_left);
+        use.addChair(255);
         use.makeTile(256, Table_begin);
         use.makeTile(257, Chair_right);
+        use.addChair(257);
 
 
     }
 
+    /**
+     * Instantiates a new Game ui.
+     */
     public GameUI() {
 
         // Main setup for Window
@@ -389,6 +437,23 @@ public class GameUI {
         Floor_doorkitbottom = LoadTexture("Bilder/Floor/Floor_doorkitbottom.png");
         Floor_door = LoadTexture("Bilder/Floor/Floor_door.png");
 
+        // preload npcs
+        Fatman = LoadTexture("Bilder/NPCS/Fatman.png");
+        Fatman_behind = LoadTexture("Bilder/NPCS/Fatman_behind.png");
+        Fatman_right = LoadTexture("Bilder/NPCS/Fatman_right.png");
+        Fatman_left = LoadTexture("Bilder/NPCS/Fatman_left.png");
+
+        Karen = LoadTexture("Bilder/NPCS/Karen.png");
+        Karen_behind = LoadTexture("Bilder/NPCS/Karen_behind.png");
+        Karen_left = LoadTexture("Bilder/NPCS/Karen_left.png");
+        Karen_right = LoadTexture("Bilder/NPCS/Karen_right.png");
+
+        Normalman = LoadTexture("Bilder/NPCS/Normalman.png");
+        Normalman_behind = LoadTexture("Bilder/NPCS/Normalman_behind.png");
+        Normalman_left = LoadTexture("Bilder/NPCS/Normalman_left.png");
+        Normalman_right = LoadTexture("Bilder/NPCS/Normalman_right.png");
+
+
 
         //initialize mouse vector
         Vector2 mousePos = new Vector2(GetMouseX(),GetMouseY());
@@ -399,18 +464,7 @@ public class GameUI {
 
         gameObj = new GameController(20);
 
-        customer jerry = new customer(30, 30,300,300, 1,32,32,300);
-        use.addCustomer(jerry);
-
-        customer brenda = new karen(30, 30,300,300, 1,32,32,300);
-        use.addCustomer(brenda);
-
-
-
-
         FillTileArray();
-
-
 
 
         System.out.println("Text is: "+GetMousePosition());

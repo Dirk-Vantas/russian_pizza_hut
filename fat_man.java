@@ -1,9 +1,27 @@
 import com.raylib.Jaylib;
 
+/**
+ * The type Fat man.
+ */
 public class fat_man extends customer implements Icollision_object{
 
+    /**
+     * The Pizzas served.
+     */
     int pizzas_served;
 
+    /**
+     * Instantiates a new Fat man.
+     *
+     * @param x          the x
+     * @param y          the y
+     * @param sitt_x     the sitt x
+     * @param sitt_y     the sitt y
+     * @param speed      the speed
+     * @param width      the width
+     * @param height     the height
+     * @param angerLimit the anger limit
+     */
     public fat_man(float x,float y, float sitt_x,float sitt_y,float speed, float width, float height, int angerLimit)
     {
         super(x,y,sitt_x,sitt_y,speed,width,height,angerLimit);

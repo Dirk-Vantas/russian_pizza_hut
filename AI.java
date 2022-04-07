@@ -8,13 +8,24 @@ import static com.raylib.Jaylib.ORANGE;
 import static com.raylib.Raylib.*;
 
 
+/**
+ * The type Ai.
+ */
 public class AI {
 
+    /**
+     * The Max count.
+     */
     int max_count;
 
     // Singleton Session Pattern begin
     private static AI single_instance = null;
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static AI getInstance() {
         if (single_instance == null) {
             single_instance = new AI();
@@ -23,28 +34,39 @@ public class AI {
     }
     // Singleton Session Pattern end
 
-    //this class will be used as an AI controller
+    /**
+     * Instantiates a new Ai.
+     */
+//this class will be used as an AI controller
     public AI() {
 
     }
 
+    /**
+     * Customer ai tick.
+     *
+     * @param p the p
+     */
     public void customer_ai_tick(customer p)
     {
-
+        /*
         DrawText("cstm state:"+p.customer_state ,Math.round(p.worldPos.x()),Math.round(p.worldPos.y())-30,20,ORANGE);
         DrawText("cstm steps taken:"+p.steps_last_taken ,Math.round(p.worldPos.x()),Math.round(p.worldPos.y())-40,20,ORANGE);
         DrawText("cstm way to go"+p.distance_to_cover ,Math.round(p.worldPos.x()),Math.round(p.worldPos.y())-50,20,ORANGE);
         DrawText("distance"+pizza_math.getVecDistance(p.worldPos,p.goal) ,300,300,20,ORANGE);
         System.out.println(pizza_math.getVecDistance(p.worldPos,p.goal));
 
+         */
+
         //if customer is walking into restaurant
         if(p.customer_state == 0)
         {
-            if(pizza_math.getVecDistance(p.worldPos,p.goal)<1)
+            if(pizza_math.getVecDistance(p.worldPos,p.goal)<5)
             {
                 //if customer reached goal sitt him down
                 p.customer_state = 1;
             }
+
             //else increase his tangents
             else {
                 //increase steps taken so character moves forward
@@ -72,11 +94,14 @@ public class AI {
             boolean angery = p.isAngery();
             if(angery)
             {
+                ArrayListCollection use = ArrayListCollection.getInstance();
                 //temporary door location is at 30x 30y
-                p.angery_leave(new Jaylib.Vector2(30,30));
+                p.angery_leave(use.getTilesList().get(30).getWorldPos());
                 //change customer state to leaving 2
                 //and erase his last steps taken
                 p.customer_state = 2;
+                p.chair.setOccupied(false);
+
                 p.steps_last_taken = 0;
             }
         }
@@ -96,7 +121,7 @@ public class AI {
                 float yF = (float) y;
                 float xF = (float) x;
 
-            if(pizza_math.getVecDistance(p.worldPos,p.goal)<1)
+            if(pizza_math.getVecDistance(p.worldPos,p.goal)<5)
             {
                 //if customer is back at door despawn
                 p.customer_state =3;

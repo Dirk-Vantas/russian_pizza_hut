@@ -1,59 +1,162 @@
+import com.raylib.Raylib;
+
 import java.util.Random;
 
+import static com.raylib.Raylib.LoadTexture;
+
+/**
+ * The type Game controller.
+ */
 public class GameController {
 
+    /**
+     * The Round points.
+     */
     int round_points;
+    /**
+     * The Max npc count.
+     */
     int max_npc_count;
+    /**
+     * The Spawner cooldown.
+     */
     double spawner_cooldown;
+    /**
+     * The Max spawn cooldown.
+     */
     double max_spawn_cooldown;
+    private Raylib.Texture2D Fatman, Fatman_behind, Fatman_left, Fatman_right, Karen, Karen_behind, Karen_left, Karen_right, Normalman, Normalman_behind, Normalman_left, Normalman_right;
 
 
-
+    /**
+     * Instantiates a new Game controller.
+     *
+     * @param max_npc_count the max npc count
+     */
     public GameController(int max_npc_count)
     {
+        // preload npcs
+        Fatman = LoadTexture("Bilder/NPCS/Fatman.png");
+        Fatman_behind = LoadTexture("Bilder/NPCS/Fatman_behind.png");
+        Fatman_right = LoadTexture("Bilder/NPCS/Fatman_right.png");
+        Fatman_left = LoadTexture("Bilder/NPCS/Fatman_left.png");
+
+        Karen = LoadTexture("Bilder/NPCS/Karen.png");
+        Karen_behind = LoadTexture("Bilder/NPCS/Karen_behind.png");
+        Karen_left = LoadTexture("Bilder/NPCS/Karen_left.png");
+        Karen_right = LoadTexture("Bilder/NPCS/Karen_right.png");
+
+        Normalman = LoadTexture("Bilder/NPCS/Normalman.png");
+        Normalman_behind = LoadTexture("Bilder/NPCS/Normalman_behind.png");
+        Normalman_left = LoadTexture("Bilder/NPCS/Normalman_left.png");
+        Normalman_right = LoadTexture("Bilder/NPCS/Normalman_right.png");
+
         this.max_npc_count = max_npc_count;
+        this.spawner_cooldown = 10;
+        this.max_spawn_cooldown = 10;
     }
 
+    /**
+     * Add point.
+     */
     public void addPoint()
     {
         this.round_points++;
     }
 
+    /**
+     * Subtrackt points.
+     */
     public void subtracktPoints()
     {
         this.round_points--;
     }
 
-    public void spawnNPC()
+    /**
+     * Manage chairs tiles.
+     *
+     * @return the tiles
+     */
+    public Tiles manageChairs()
     {
-        if(this.spawner_cooldown < 0)
+        ArrayListCollection use = ArrayListCollection.getInstance();
+
+        Tiles Chair = null;
+
+        for(Tiles c : use.getChair())
         {
-
-            // Instanz vom Singleton
-            ArrayListCollection use = ArrayListCollection.getInstance();
-            Random rand = new Random();
-            //get random type of npc and add him
-            int nextNPC = rand.nextInt(3);
-
-            switch (nextNPC) {
-                case 0:
-                    use.addCustomer(new karen(30, 30, 300, 300, 1, 32, 32, 300));
-                    //reset cooldown
-                    this.spawner_cooldown = this.max_spawn_cooldown;
-                    break;
-                case 1:
-                    use.addCustomer(new fat_man(30, 30, 300, 300, 1, 32, 32, 300));
-                    //reset cooldown
-                    this.spawner_cooldown = this.max_spawn_cooldown;
-                    break;
+            if(c.getOccupied() == false)
+            {
+                //chair is empty and can be used return
+                Chair = c;
+                break;
+            }
+            else
+            {
+                Chair = null;
             }
 
-
         }
-        else
-        {
-            //if spawner cooldown is active reduce it further
-            this.spawner_cooldown--;
+
+        return Chair;
+    }
+
+
+    /**
+     * Spawn npc.
+     */
+    public void spawnNPC() {
+
+        var chairCheck = manageChairs();
+        if (chairCheck != null) {
+            if (this.spawner_cooldown < 0) {
+
+                // Instanz vom Singleton
+                ArrayListCollection use = ArrayListCollection.getInstance();
+                Random rand = new Random();
+                //get random type of npc and add him
+                int nextNPC = rand.nextInt(2);
+
+                var sitt_x = chairCheck.getWorldPos().x();
+                var sitt_y = chairCheck.getWorldPos().y();
+
+                switch (nextNPC) {
+                    case 0:
+                        customer karen = new karen(180, 45, sitt_x, sitt_y, 1, 32, 32, 300);
+                        karen.setTexture2D(this.Karen);
+                        use.addCustomer(karen);
+                        karen.setChair(chairCheck);
+
+                        //set the chair as true
+                        chairCheck.setOccupied(true);
+
+                        //reset cooldown
+                        this.spawner_cooldown = this.max_spawn_cooldown;
+                        break;
+                    case 1:
+                        customer fatman = new fat_man(180, 45, sitt_x, sitt_y, 1, 32, 32, 300);
+                        fatman.setTexture2D(this.Fatman);
+                        use.addCustomer(fatman);
+                        fatman.setChair(chairCheck);
+                        //reset cooldown
+                        chairCheck.setOccupied(true);
+                        this.spawner_cooldown = this.max_spawn_cooldown;
+                        break;
+                    case 2:
+                        customer normal_man = new customer(30, 30, 300, 300, 1, 32, 32, 300);
+                        normal_man.setTexture2D(this.Fatman);
+                        use.addCustomer(normal_man);
+                        //reset cooldown
+                        chairCheck.setOccupied(true);
+                        this.spawner_cooldown = this.max_spawn_cooldown;
+                        break;
+                }
+
+
+            } else {
+                //if spawner cooldown is active reduce it further
+                this.spawner_cooldown--;
+            }
         }
     }
 }

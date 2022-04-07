@@ -5,24 +5,84 @@ import com.raylib.Raylib.Rectangle;
 import java.util.ArrayList;
 
 
+/**
+ * The type Customer.
+ */
 public class customer implements Icollision_object{
 
+    /**
+     * The World pos.
+     */
     Vector2 worldPos;
+    /**
+     * The Collision body.
+     */
     Rectangle collision_body;
 
+    private Raylib.Texture2D texture;
+
+    /**
+     * The Speed.
+     */
     float speed;
+    /**
+     * The Width.
+     */
     float width;
+    /**
+     * The Height.
+     */
     float height;
+    /**
+     * The Anger.
+     */
     int anger;
+    /**
+     * The Anger limit.
+     */
     int angerLimit;
+    /**
+     * The Goal.
+     */
     Vector2 goal;
+    /**
+     * The Sitting location.
+     */
     Vector2 sitting_location;
+    /**
+     * The Name.
+     */
     String name;
+    /**
+     * The Distance to cover.
+     */
     double distance_to_cover;
+    /**
+     * The Steps last taken.
+     */
     double steps_last_taken;
+    /**
+     * The Customer state.
+     */
     int customer_state;
+    /**
+     * The Chair.
+     */
+    Tiles chair;
 
 
+    /**
+     * Instantiates a new Customer.
+     *
+     * @param x          the x
+     * @param y          the y
+     * @param sitt_x     the sitt x
+     * @param sitt_y     the sitt y
+     * @param speed      the speed
+     * @param width      the width
+     * @param height     the height
+     * @param angerLimit the anger limit
+     */
     public customer(float x,float y, float sitt_x,float sitt_y,float speed, float width, float height, int angerLimit)
     {
         //where will customer spawn
@@ -48,6 +108,14 @@ public class customer implements Icollision_object{
         //if this object gets created spawn it
         spawn();
     }
+
+    /**
+     * Set chair.
+     *
+     * @param chair the chair
+     */
+    public void setChair(Tiles chair){this.chair = chair;}
+
     public boolean isAngery()
     {
         boolean isangery = Boolean.parseBoolean(null);
@@ -75,7 +143,12 @@ public class customer implements Icollision_object{
         this.distance_to_cover = pizza_math.getVecDistance(this.worldPos,this.sitting_location);
     }
 
-    //gets called when customer has been server in time and needs to leave restaurant and be removed from arraylist
+    /**
+     * Serve.
+     *
+     * @param door_position the door position
+     */
+//gets called when customer has been server in time and needs to leave restaurant and be removed from arraylist
     public void serve(Vector2 door_position){
         //customer wants to leave
         this.customer_state = 2;
@@ -88,12 +161,22 @@ public class customer implements Icollision_object{
         // -->
     }
 
-    //make customer leave when angry
+    /**
+     * Angery leave.
+     *
+     * @param door_position the door position
+     */
+//make customer leave when angry
     public void angery_leave(Vector2 door_position){
         //change goal to door but dont add no points to the scoreboard
         this.goal = door_position;
     }
 
+    /**
+     * Death.
+     *
+     * @param p the p
+     */
     public void death(customer p)
     {
         //if customer dies he need to be removed from array so he does not get collsion and stops being rendered
@@ -102,18 +185,52 @@ public class customer implements Icollision_object{
     }
 
 
+    /**
+     * Gets world pos.
+     *
+     * @return the world pos
+     */
     public Vector2 getWorldPos()
     {
         return this.worldPos;
     }
+
+    /**
+     * Gets width.
+     *
+     * @return the width
+     */
     public float getWidth()
     {
         return this.width;
     }
+
+    /**
+     * Gets height.
+     *
+     * @return the height
+     */
     public float getHeight()
     {
         return this.height;
     }
 
 
+    /**
+     * Gets texture 2 d.
+     *
+     * @return the texture 2 d
+     */
+    public Raylib.Texture2D getTexture2D() {
+        return this.texture;
+    }
+
+    /**
+     * Sets texture 2 d.
+     *
+     * @param texture2D the texture 2 d
+     */
+    public void setTexture2D(Raylib.Texture2D texture2D) {
+        this.texture = texture2D;
+    }
 }

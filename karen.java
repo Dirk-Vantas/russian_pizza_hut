@@ -1,7 +1,22 @@
 import com.raylib.Jaylib;
 
+/**
+ * The type Karen.
+ */
 public class karen extends customer implements Icollision_object{
 
+    /**
+     * Instantiates a new Karen.
+     *
+     * @param x          the x
+     * @param y          the y
+     * @param sitt_x     the sitt x
+     * @param sitt_y     the sitt y
+     * @param speed      the speed
+     * @param width      the width
+     * @param height     the height
+     * @param angerLimit the anger limit
+     */
     public karen(float x,float y, float sitt_x,float sitt_y,float speed, float width, float height, int angerLimit)
     {
         super(x,y,sitt_x,sitt_y,speed,width,height,angerLimit);
